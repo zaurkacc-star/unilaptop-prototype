@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unilaptop — Global Enterprise Laptop Rental Platform</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ===== СТИЛИ UNILAPTOP SAAS & AITU SYSTEM ===== */
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif}
+body{background:#e9ecef;color:#333;min-height:100vh;display:flex;flex-direction:column}
+.top-header{background:#fff;border-bottom:1px solid #dcdcdc;padding:12px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.logo-area{display:flex;align-items:center;gap:15px}
+.logo-title{font-size:26px;font-weight:800;color:#0d47a1;letter-spacing:1px}
+.logo-sub{font-size:12px;color:#555;border-left:2px solid #0d47a1;padding-left:10px}
+.controls{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.btn-logout,.btn-nw{white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:6px}
+.controls > *{flex-shrink:0}
+.controls label{font-size:12px;font-weight:bold;color:#555;margin-right:4px}
+select,input[type=text],input[type=date]{padding:7px 10px;border:1px solid #ccc;border-radius:4px;background:#f8f9fa;font-size:13px}
+.phone{text-align:right;font-size:11px;color:#777}.phone b{display:block;font-size:17px;color:#0d47a1}
+.nav{background:linear-gradient(180deg,#b0b0b0,#8e8e8e 50%,#757575);border-bottom:1px solid #555;box-shadow:0 2px 5px rgba(0,0,0,.2);display:flex;justify-content:center;flex-wrap:wrap}
+.nav button{background:transparent;border:0;border-right:1px solid rgba(255,255,255,.3);border-left:1px solid rgba(0,0,0,.15);color:#fff;padding:12px 25px;font-size:14px;font-weight:bold;cursor:pointer;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.nav button:hover,.nav button.active{background:linear-gradient(180deg,#1565c0,#0d47a1)}
+.hero{background:linear-gradient(135deg,#a1c4fd,#c2e9fb 50%,#84fab0);padding:30px 5%;border-bottom:2px solid #fff}
+.hero-in{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.hero h1{font-size:28px;color:#0d47a1;margin-bottom:8px}.hero p{max-width:600px;line-height:1.4}
+.badge-box{background:rgba(255,255,255,.85);padding:16px 22px;border-radius:8px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+.badge-box i{font-size:34px;color:#0d47a1}
+main{max-width:1200px;margin:25px auto;width:92%;flex-grow:1}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px;margin-bottom:22px}
+.stat{border:1px solid #ccc;border-radius:6px;padding:14px;text-align:center;background:linear-gradient(180deg,#fff,#f1f3f5);box-shadow:0 2px 4px rgba(0,0,0,.05)}
+.stat small{font-size:12px;color:#666}.stat .n{font-size:28px;font-weight:bold;color:#0d47a1;margin-top:6px}
+.stat.ok .n{color:#2e7d32}.stat.bad .n{color:#d32f2f}
+.card{background:#fff;border:1px solid #dcdcdc;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.06);padding:20px;margin-bottom:20px}
+.card h2{font-size:20px;color:#0d47a1;border-bottom:2px solid #e0e0e0;padding-bottom:10px;margin-bottom:16px;display:flex;gap:10px;align-items:center}
+.muted{font-size:13px;color:#666;margin-bottom:12px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.toolbar input{flex:1;min-width:220px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border:1px solid #e0e0e0;padding:9px 11px;text-align:left}
+th{background:linear-gradient(180deg,#f8f9fa,#e9ecef);color:#444}
+tbody tr:nth-child(even){background:#f9f9f9}
+tr.click{cursor:pointer}tr.click:hover{background:#e3f2fd!important}
+.b{padding:3px 8px;border-radius:3px;font-size:12px;font-weight:bold;display:inline-block;margin:1px}
+.b-on{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.b-off{background:#eceff1;color:#546e7a;border:1px solid #b0bec5}
+.b-rep{background:#ffebee;color:#c62828;border:1px solid #ef9a9a}
+.b-app{background:#e3f2fd;color:#1565c0;border:1px solid #90caf9}
+.b-bad{background:#fff3e0;color:#e65100;border:1px solid #ffcc80}
+.btn{padding:7px 14px;border:0;border-radius:4px;font-weight:bold;cursor:pointer;font-size:13px;color:#fff;background:#1976d2}
+.btn:hover{background:#115293}.btn.g{background:#388e3c}.btn.g:hover{background:#1b5e20}.btn.o{background:#f57c00}.btn.s{background:#78909c}
+.btn-danger{background:#d32f2f}.btn-danger:hover{background:#c62828}
+.btn:disabled{background:#ccc;color:#666;cursor:not-allowed}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.fg{display:flex;flex-direction:column;gap:5px}.fg label{font-size:13px;font-weight:bold;color:#555}
+.law{background:#fff3cd;border:1px solid #ffeeba;color:#856404;padding:12px;border-radius:4px;font-size:13px;margin:14px 0}
+.comp{background:#ffebee;border:1px solid #ef9a9a;color:#b71c1c;padding:12px;border-radius:4px;margin:14px 0;font-weight:bold}
+canvas#sig{border:1px dashed #1565c0;border-radius:4px;background:#fafcff;width:100%;max-width:420px;height:130px;touch-action:none;cursor:crosshair}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:1000}
+.modal.show{display:flex}
+.mbody{background:#fff;padding:22px;border-radius:6px;max-width:580px;width:92%;max-height:90vh;overflow:auto;box-shadow:0 5px 15px rgba(0,0,0,.3)}
+.mbody h3{color:#0d47a1;margin-bottom:10px}
+.bar{height:10px;background:#e0e0e0;border-radius:5px;overflow:hidden;margin:3px 0 10px}.bar i{display:block;height:100%;background:#1976d2}
+.term{background:#1e1e1e;color:#0f0;font-family:monospace;padding:10px;border-radius:4px;height:200px;overflow-y:auto;font-size:12px;text-align:left;margin:10px 0}
+.term-in{display:flex;gap:6px;font-family:monospace}.term-in input{flex:1;background:#2b2b2b;color:#0f0;border:1px solid #444;font-family:monospace}
+.footer{background:#0d47a1;color:#fff;padding:20px 5%;border-top:3px solid #1565c0;font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center}
+.footer-disclaimer{font-size:11px;color:#d0d7de;margin-top:4px;max-width:600px;line-height:1.3}
+.hide{display:none!important}
+.dept-link{font-size:12px;color:#1565c0;word-break:break-all}.hint{font-size:12px;color:#777;margin-top:6px;text-align:right}
+
+/* Защита приватности (Anti-Abuse & Blur Mode) */
+.privacy-watermark{position:absolute;top:15px;right:15px;color:rgba(255,0,0,0.3);font-size:18px;font-weight:bold;pointer-events:none;transform:rotate(-10deg);z-index:99}
+.blur-folder{filter:blur(6px);background:#e2e8f0;padding:8px;border-radius:4px;user-select:none;margin-top:4px;color:#64748b}
+
+@media(max-width:700px){.grid2{grid-template-columns:1fr}.hero-in{flex-direction:column;align-items:flex-start}}
+@media print {
+  body * { visibility: hidden !important; }
+  #tab-act, #tab-act * { visibility: visible !important; }
+  #tab-act { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; border: none !important; box-shadow: none !important; margin: 0 !important; padding: 10px !important; }
+  #tab-act button, #tab-act .hint, #tab-act select, #tab-act input { display: none !important; }
+  .print-replacement { display: inline !important; font-weight: bold; }
+}
+/* ===== OWNER DASHBOARD (fleet / B2B SaaS) ===== */
+.controls{flex-wrap:nowrap}
+.controls > *{flex-shrink:0}
+@media(max-width:900px){.controls{flex-wrap:wrap}}
+.own-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:bold;padding:4px 10px;border-radius:12px;white-space:nowrap;background:#eceff1;color:#546e7a;border:1px solid #b0bec5}
+.chip i.dot{width:8px;height:8px;border-radius:50%;background:#90a4ae;display:inline-block}
+.chip.up{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}.chip.up i.dot{background:#2e7d32}
+.chip.down{background:#ffebee;color:#c62828;border-color:#ef9a9a}.chip.down i.dot{background:#c62828}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:18px}
+.kpi{background:#fff;border:1px solid #ddd;border-left:4px solid #1976d2;border-radius:4px;padding:14px}
+.kpi.green{border-left-color:#388e3c}.kpi.orange{border-left-color:#f57c00}.kpi.purple{border-left-color:#6a1b9a}
+.kpi small{display:block;font-size:11px;font-weight:bold;color:#666;text-transform:uppercase;letter-spacing:.4px}
+.kpi .v{font-size:24px;font-weight:800;color:#0d47a1;margin:4px 0}
+.kpi .sub{font-size:12px;color:#777}
+.own-card{background:#f8f9fa;padding:15px;border:1px solid #ddd;border-radius:4px}
+.stack{display:flex;height:14px;border-radius:7px;overflow:hidden;background:#e2e8f0;margin:8px 0 12px}
+.stack i{display:block;height:100%}
+.lg{display:flex;justify-content:space-between;gap:10px;font-size:13px;line-height:1.9}
+.lg span.k{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+.fin-row{display:flex;justify-content:space-between;gap:10px;font-size:14px;line-height:2;border-bottom:1px dashed #ddd}
+.fin-row:last-child{border-bottom:0}
+.note-s{font-size:11px;color:#888;margin-top:8px}
+.alert-row{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0;border-bottom:1px solid #eee}
+.alert-row:last-child{border-bottom:0}
+.tbl-wrap{overflow-x:auto}
+
+/* ===== AUTH (enterprise) ===== */
+.auth{max-width:440px!important;padding:0!important;overflow:hidden}
+.auth-brand{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0b2f6b,#0d47a1);color:#fff;padding:20px 24px}
+.auth-logo{width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.auth-name{font-size:20px;font-weight:800;letter-spacing:1.5px}
+.auth-name span{font-weight:400;background:#fff;color:#0d47a1;border-radius:3px;padding:0 6px;font-size:12px;margin-left:6px;letter-spacing:0}
+.auth-sub{font-size:12px;opacity:.85;margin-top:2px}
+.auth-in{padding:16px 24px 20px}
+.auth-lang{display:flex;gap:6px;justify-content:flex-end;margin-bottom:10px}
+.auth-lang button{border:1px solid #cfd8dc;background:#fff;border-radius:4px;padding:3px 9px;font-size:12px;font-weight:bold;color:#546e7a;cursor:pointer}
+.auth-lang button.on{background:#0d47a1;color:#fff;border-color:#0d47a1}
+.auth-tabs{display:flex;border-bottom:2px solid #e0e0e0;margin-bottom:16px}
+.auth-tabs button{flex:1;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;padding:10px 4px;font-weight:bold;font-size:13px;color:#607d8b;cursor:pointer}
+.auth-tabs button.on{color:#0d47a1;border-bottom-color:#0d47a1}
+.auth .fg{text-align:left;margin-bottom:12px}
+.auth .fg small{font-size:11px;color:#888}
+.auth input,.auth select,textarea{width:100%;padding:10px;border:1px solid #ccc;border-radius:4px;font-size:13px;background:#f8f9fa;font-family:inherit}
+textarea{resize:vertical}
+.auth-msg{padding:9px 12px;border-radius:4px;font-size:13px;margin:10px 0;text-align:left}
+.auth-msg.ok{background:#e8f5e9;color:#1b5e20;border:1px solid #a5d6a7}
+.auth-msg.err{background:#ffebee;color:#b71c1c;border:1px solid #ef9a9a}
+.auth-foot{font-size:11px;color:#888;margin-top:14px;text-align:center}
+/* ===== TOASTS / BADGES ===== */
+#toasts{position:fixed;top:14px;right:14px;z-index:3000;display:flex;flex-direction:column;gap:8px;max-width:340px}
+.toast{background:#263238;color:#fff;padding:11px 14px;border-radius:6px;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.35);border-left:4px solid #43a047;animation:tin .25s}
+.toast.warn{border-left-color:#fb8c00}.toast.err{border-left-color:#e53935}
+@keyframes tin{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+.nbadge{display:inline-block;min-width:18px;padding:1px 6px;border-radius:10px;background:#e53935;color:#fff;font-size:11px;font-weight:bold;text-align:center;margin-left:6px;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(229,57,53,.6)}70%{box-shadow:0 0 0 8px rgba(229,57,53,0)}100%{box-shadow:0 0 0 0 rgba(229,57,53,0)}}
+/* ===== TICKETS ===== */
+.desk{margin-bottom:20px;padding-bottom:6px;border-bottom:2px solid #e0e0e0}
+.desk-h{font-size:16px;color:#0d47a1;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px;margin-bottom:18px}
+.tk{background:#fff;border:1px solid #ddd;border-left:5px solid #f57c00;border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:7px}
+.tk.connected{border-left-color:#1976d2}.tk.approved{border-left-color:#2e7d32}.tk.done{border-left-color:#90a4ae;opacity:.7}
+.tk-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.tk-top small{color:#777}
+.tk-who{font-size:13px}
+.tk-c{background:#f8f9fa;border:1px dashed #ccc;border-radius:4px;padding:8px;font-size:13px;white-space:pre-wrap;word-break:break-word}
+.tk-act{display:flex;gap:8px;flex-wrap:wrap}
+.btn.rs{background:#6a1b9a}.btn.rs:hover{background:#4a148c}
+.btn.s.on{background:#0d47a1}
+/* ===== REMOTE SESSION (Anti-Abuse Engine) ===== */
+.rs-meta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:13px;margin-bottom:8px}
+.rs-ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px}
+.rs-screen{border:3px solid #263238;border-radius:8px;background:#0b1d33;overflow:hidden;margin:10px 0;user-select:none}
+.rs-bar{display:flex;justify-content:space-between;gap:10px;background:#263238;color:#cfd8dc;font:12px monospace;padding:5px 10px;flex-wrap:wrap}
+.rs-live{color:#ff5252;font-weight:bold}
+.rs-desk{position:relative;height:290px;background:linear-gradient(135deg,#1565c0,#0d47a1 45%,#4a148c);overflow:hidden}
+.rs-desk.ctl{cursor:none}
+.rs-icons{position:absolute;left:12px;top:12px;display:flex;flex-direction:column;gap:12px;color:#fff;font-size:11px;text-align:center}
+.rs-icons div{width:62px}.rs-icons i{display:block;font-size:26px;margin-bottom:2px}
+.rs-win{position:absolute;left:100px;top:26px;width:52%;background:#fff;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.45);overflow:hidden}
+.rs-wt{display:flex;justify-content:space-between;background:#e3e8ee;padding:6px 10px;font-size:12px;font-weight:bold;color:#333}
+.rs-wb{padding:14px;font-size:13px;color:#333;min-height:90px}
+.rs-err{color:#b71c1c}.rs-okmsg{color:#1b5e20;font-weight:bold}
+.rs-prot{position:absolute;right:14px;top:34px;width:28%;cursor:not-allowed}
+.rs-blur{background:#e2e8f0;border-radius:6px;padding:10px;font-size:12px;filter:blur(4px);color:#475569;line-height:1.7}
+.rs-lock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:26px}
+.rs-cursor{position:absolute;left:40%;top:50%;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.85);border:3px solid #90caf9;pointer-events:none;transition:left .9s,top .9s;z-index:50}
+.rs-desk.ctl .rs-cursor{border-color:#ff5252;transition:none}
+.rs-task{display:flex;justify-content:space-between;background:rgba(15,23,42,.95);color:#cfd8dc;padding:5px 10px;font-size:12px}
+/* ===== CATALOG ===== */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:12px 0}
+.cat-card{border:1px solid #ddd;border-radius:6px;padding:14px;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:6px}
+.cat-card h4{color:#0d47a1}
+.tagr{display:inline-block;font-size:11px;font-weight:bold;padding:2px 7px;border-radius:10px;background:#e3f2fd;color:#1565c0;margin:2px 3px 2px 0}
+.tagr.g{background:#e8f5e9;color:#2e7d32}.tagr.p{background:#f3e5f5;color:#6a1b9a}
+@media print{#st-desk-wrap{display:none!important}}
+.trash{margin-top:10px;border:1px dashed #cfd8dc;border-radius:6px;font-size:12px;color:#78909c;transition:background .15s,border-color .15s}
+.trash-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 10px;cursor:pointer;user-select:none}
+.trash-h .tr-hint{flex:1;text-align:right;opacity:.8}
+.tr-n{background:#eceff1;border-radius:9px;padding:0 7px;font-weight:bold}
+.trash-b{border-top:1px dashed #cfd8dc;padding:6px 10px}
+.tr-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:4px 0;flex-wrap:wrap}
+.tr-left{color:#90a4ae}
+.btn-lnk{background:none;border:0;color:#1976d2;cursor:pointer;font-size:12px;font-weight:bold;padding:0}
+.btn-trash{background:none;border:0;color:#90a4ae;cursor:pointer;font-size:14px;padding:2px 6px;margin-left:auto}
+.btn-trash:hover{color:#c62828}
+.dragging .trash{border-color:#90a4ae;background:#f5f7f8}
+.trash.over{border-color:#1976d2;background:#e3f2fd;color:#1976d2}
+.tk[draggable=true],tr[draggable=true]{cursor:grab}
+.tk.rejected{border-left-color:#ad1457;opacity:.75}
+.b-rej{background:#fce4ec;color:#ad1457}
+@media(max-width:600px){.trash-h .tr-hint{display:none}}
+@media print{.trash{display:none!important}}
+.my-sec{margin-top:18px;padding-top:14px;border-top:2px solid #e0e0e0}
+.my-sec h3{font-size:16px;color:#0d47a1;margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<!-- ОКНО АВТОРИЗАЦИИ (LOGIN / РЕГИСТРАЦИЯ / ЗАБЫЛ ПАРОЛЬ) -->
+<div class="modal show" id="m-login" style="background: rgba(13, 71, 161, 0.92);">
+  <div class="mbody auth">
+    <div class="auth-brand">
+      <div class="auth-logo"><i class="fa-solid fa-laptop-code"></i></div>
+      <div><div class="auth-name">UNILAPTOP <span>SaaS</span></div><div class="auth-sub" data-i18n="authSub"></div></div>
+    </div>
+    <div class="auth-in">
+      <div class="auth-lang">
+        <button type="button" data-l="ru" onclick="setLang('ru')">RU</button>
+        <button type="button" data-l="kk" onclick="setLang('kk')">KK</button>
+        <button type="button" data-l="en" onclick="setLang('en')">EN</button>
+      </div>
+      <div class="auth-tabs">
+        <button type="button" id="at-login" class="on" onclick="authTab('login')" data-i18n="tabLogin"></button>
+        <button type="button" id="at-reg" onclick="authTab('reg')" data-i18n="tabReg"></button>
+        <button type="button" id="at-forgot" onclick="authTab('forgot')" data-i18n="tabForgot"></button>
+      </div>
+
+      <!-- Вход -->
+      <div id="ap-login" class="auth-pane">
+        <div class="fg">
+          <label data-i18n="lblRole"></label>
+          <select id="login-role" onchange="updateLoginEmail(this.value)">
+            <option value="owner" data-i18n="lrOwner">🌐 Владелец Unilaptop (SaaS Super Admin)</option>
+            <option value="admin" data-i18n="lrAdmin">💻 IT Администратор AITU (Мониторинг)</option>
+            <option value="staff" data-i18n="lrStaff">📋 Сотрудник выдачи AITU (Склад / Акты)</option>
+            <option value="student" data-i18n="lrStudent">🎓 Студент AITU (Аликеев Алмаз)</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label data-i18n="lblUser"></label>
+          <input type="text" id="login-user" value="owner@unilaptop.kz" autocomplete="username">
+        </div>
+        <div class="fg">
+          <label data-i18n="lblPass"></label>
+          <input type="password" id="login-pass" value="********" autocomplete="current-password" onkeydown="if(event.key==='Enter')performLogin()">
+        </div>
+        <button class="btn" style="width: 100%; padding: 12px; font-size: 15px;" onclick="performLogin()" data-i18n="btnLogin">Войти в систему</button>
+      </div>
+
+      <!-- Регистрация -->
+      <div id="ap-reg" class="auth-pane hide">
+        <div class="fg"><label data-i18n="lblRegId"></label><input type="text" id="reg-id" placeholder="231044 / name@astanait.edu.kz" autocomplete="off"></div>
+        <div class="fg"><label data-i18n="lblPass"></label><input type="password" id="reg-pass" autocomplete="new-password"></div>
+        <div class="fg"><label data-i18n="lblPass2"></label><input type="password" id="reg-pass2" autocomplete="new-password"></div>
+        <div class="fg"><label data-i18n="lblTg"></label><input type="text" id="reg-tg" placeholder="@username" autocomplete="off"><small data-i18n="tgHint"></small></div>
+        <button class="btn g" style="width: 100%; padding: 12px; font-size: 15px;" onclick="doRegister()" data-i18n="btnReg"></button>
+      </div>
+
+      <!-- Забыл пароль -->
+      <div id="ap-forgot" class="auth-pane hide">
+        <div class="fg"><label data-i18n="lblForgot"></label><input type="text" id="fg-id" placeholder="@username / name@astanait.edu.kz" autocomplete="off"></div>
+        <button class="btn o" style="width: 100%; padding: 11px;" onclick="sendResetCode()"><i class="fa-brands fa-telegram"></i> <span data-i18n="btnSendCode"></span></button>
+        <div id="fg-step2" class="hide" style="margin-top:14px">
+          <div class="fg"><label data-i18n="lblCode"></label><input type="text" id="fg-code" maxlength="6" inputmode="numeric" autocomplete="one-time-code"></div>
+          <div class="fg"><label data-i18n="lblNewPass"></label><input type="password" id="fg-pass" autocomplete="new-password"></div>
+          <button class="btn g" style="width: 100%; padding: 11px;" onclick="doReset()" data-i18n="btnReset"></button>
+        </div>
+      </div>
+
+      <div id="auth-msg" class="auth-msg hide"></div>
+      <p class="auth-foot" data-i18n="authFoot"></p>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО СОГЛАСИЯ СТУДЕНТА НА ДОСТУП (CONSENT PROMPT) -->
+<div class="modal" id="m-consent">
+  <div class="mbody" style="border:2px solid #d32f2f">
+    <h3 style="color:#d32f2f"><i class="fa-solid fa-shield-cat"></i> Запрос удалённого подключения!</h3>
+    <p style="font-size:13px;margin:10px 0">IT-Администратор запрашивает доступ к вашему устройству <b id="c-laptop">AITU-NB-0102</b>.</p>
+    <div style="background:#fff3cd;padding:10px;border-radius:4px;font-size:12px;margin-bottom:12px">
+      <b>Причина:</b> Плановая диагностика ПО агента мониторинга.<br>
+      <b>Безопасность:</b> Личные файлы заблокированы (Blur Mode). Сеанс строго до 15 минут.
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn g" style="flex:1" onclick="respondConsent(true)">Разрешить сеанс</button>
+      <button class="btn btn-danger" style="flex:1" onclick="respondConsent(false)">Заблокировать</button>
+    </div>
+  </div>
+</div>
+
+<header class="top-header">
+  <div class="logo-area"><div class="logo-title"><i class="fa-solid fa-laptop-code"></i> UNILAPTOP</div>
+  <div class="logo-sub"><span data-i18n="tagline"></span><br><b>Astana IT University</b></div></div>
+  <div class="controls">
+    <div><label data-i18n="role"></label>
+      <select id="role" onchange="applyRole()">
+        <option value="owner" data-i18n="roleOwner">🌐 Владелец Unilaptop</option>
+        <option value="admin" data-i18n="roleAdmin">💻 Администратор (IT)</option>
+        <option value="staff" data-i18n="roleStaff">📋 Отдел выдачи</option>
+        <option value="student" data-i18n="roleStudent">🎓 Студент</option>
+      </select></div>
+    <div><label data-i18n="lang"></label>
+      <select id="lang" onchange="setLang(this.value)">
+        <option value="ru">Русский</option><option value="kk">Қазақша</option><option value="en">English</option>
+      </select></div>
+    <div class="phone"><b>+7 (7172) 64-57-10</b><span data-i18n="support"></span></div>
+    <button type="button" id="bell" class="btn s btn-nw hide" onclick="goDesk()" data-i18n-title="bellTip"><i class="fa-solid fa-bell"></i> <span class="nbadge hide" id="bell-badge">0</span></button>
+    <button type="button" class="btn btn-danger btn-logout" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="logout"></span></button>
+  </div>
+</header>
+
+<nav class="nav">
+  <button id="nav-owner" class="hide" onclick="tab('owner')"><i class="fa-solid fa-globe"></i> <span data-i18n="navOwner">Глобальный фонд</span></button>
+  <button id="nav-mon" class="hide" onclick="tab('mon')"><i class="fa-solid fa-desktop"></i> <span data-i18n="navMon">Мониторинг</span> <span class="nbadge hide" id="nav-badge">0</span></button>
+  <button id="nav-act" class="hide" onclick="tab('act')"><i class="fa-solid fa-file-contract"></i> <span data-i18n="navAct">Акты и Выдача</span> <span class="nbadge hide" id="nav-act-badge">0</span></button>
+  <button id="nav-stat" class="hide" onclick="tab('stat')"><i class="fa-solid fa-chart-pie"></i> <span data-i18n="navStat">Статистика</span></button>
+  <button id="nav-my" class="hide" onclick="tab('my')"><i class="fa-solid fa-laptop"></i> <span data-i18n="navMy">Мой ноутбук</span></button>
+</nav>
+
+<section class="hero"><div class="hero-in">
+  <div><h1 data-i18n="heroTitle"></h1><p data-i18n="heroDesc"></p></div>
+  <div class="badge-box"><i class="fa-solid fa-shield-halved"></i><div style="font-weight:bold;font-size:14px" data-i18n="secure"></div><div style="font-size:11px;color:#666">AITU Agent v2.4 + Anti-Abuse</div></div>
+</div></section>
+
+<main>
+  <div class="stats" id="stats">
+    <div class="stat"><small data-i18n="stTotal"></small><div class="n" id="s-total">1000</div></div>
+    <div class="stat"><small data-i18n="stIssued"></small><div class="n" id="s-issued">237</div></div>
+    <div class="stat ok"><small data-i18n="stOnline"></small><div class="n" id="s-online">184</div></div>
+    <div class="stat bad"><small data-i18n="stBroken"></small><div class="n" id="s-broken">6</div></div>
+  </div>
+
+  <!-- 1. ПАНЕЛЬ ВЛАДЕЛЬЦА (ГЛОБАЛЬНЫЙ ФОНД SAAS) -->
+  <div id="tab-owner" class="card hide">
+    <div class="own-head">
+      <div>
+        <h2><i class="fa-solid fa-globe"></i> <span data-i18n="ownerTitle"></span></h2>
+        <p class="muted" data-i18n="ownerDesc"></p>
+      </div>
+      <span class="chip" id="api-chip"><i class="dot"></i><span id="api-chip-txt"></span></span>
+    </div>
+
+    <div class="kpi-grid" id="own-kpi"></div>
+
+    <div class="grid2" style="margin-bottom:20px">
+      <div class="own-card">
+        <h4 style="color:#0d47a1;margin-bottom:6px" data-i18n="structTitle"></h4>
+        <div id="own-struct"></div>
+      </div>
+      <div class="own-card">
+        <h4 style="color:#0d47a1;margin-bottom:6px" data-i18n="finTitle"></h4>
+        <div id="own-fin"></div>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-bottom:20px">
+      <div class="own-card">
+        <h4 style="color:#0d47a1;margin-bottom:6px" data-i18n="healthTitle"></h4>
+        <div id="own-health"></div>
+      </div>
+      <div class="own-card">
+        <h4 style="color:#0d47a1;margin-bottom:6px" data-i18n="alertsTitle"></h4>
+        <div id="own-alerts"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:16px;margin-bottom:10px" data-i18n="tenantTitle"></h3>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th data-i18n="thOrg"></th><th data-i18n="thAlloc"></th><th data-i18n="thUtil"></th><th data-i18n="thContract"></th><th data-i18n="thFee"></th></tr></thead>
+      <tbody id="own-tenants"></tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- 2. МОНИТОРИНГ (АДМИН AITU) -->
+  <div id="tab-mon" class="card hide">
+    <h2><i class="fa-solid fa-network-wired"></i><span data-i18n="titleMon"></span> <span class="nbadge hide" id="tk-badge">0</span></h2>
+    <p class="muted" data-i18n="descMon"></p>
+    <div class="desk" id="desk">
+      <h3 class="desk-h"><i class="fa-solid fa-headset"></i> <span data-i18n="deskTitle"></span> <span class="chip up"><i class="dot"></i>LIVE</span></h3>
+      <div id="tk-desk" class="tk-grid"></div>
+      <div id="tr-admin"></div>
+    </div>
+    <div class="toolbar">
+      <input type="text" id="q" data-ph="search" oninput="renderTable()">
+      <select id="flt" onchange="renderTable()">
+        <option value="all" data-i18n="fAll"></option><option value="online" data-i18n="fOnline"></option>
+        <option value="offline" data-i18n="fOffline"></option><option value="repair" data-i18n="fRepair"></option>
+      </select>
+    </div>
+    <div class="scroll"><table><thead><tr>
+      <th data-i18n="thId"></th><th data-i18n="thStudent"></th><th data-i18n="thStatus"></th>
+      <th data-i18n="thSeen"></th><th data-i18n="thApps"></th><th data-i18n="thAction"></th>
+    </tr></thead><tbody id="tbody"></tbody></table></div>
+    <p class="muted" style="margin-top:10px" data-i18n="clickHint"></p>
+  </div>
+
+  <!-- 3. АКТ ПРИЕМА-ПЕРЕДАЧИ (ВЫДАЧА) -->
+  <div id="tab-act" class="card hide">
+    <h2><i class="fa-solid fa-file-signature"></i><span data-i18n="titleAct"></span></h2>
+    <div class="desk" id="st-desk-wrap">
+      <h3 class="desk-h"><i class="fa-solid fa-inbox"></i> <span data-i18n="stDeskTitle"></span> <span class="nbadge hide" id="st-badge">0</span> <span class="chip up"><i class="dot"></i>LIVE</span></h3>
+      <div id="st-desk" class="tk-grid"></div>
+      <div id="tr-staff"></div>
+    </div>
+    <form onsubmit="saveAct(event)">
+      <div class="grid2">
+        <div class="fg"><label data-i18n="actType"></label>
+          <select id="act-type" onchange="calc()"><option value="issue" data-i18n="tIssue"></option><option value="return" data-i18n="tReturn"></option></select></div>
+        <div class="fg"><label data-i18n="actStudent"></label><input type="text" id="act-student" data-ph="phStudent" required></div>
+        <div class="fg"><label data-i18n="actLaptop"></label><input type="text" id="act-laptop" data-ph="phLaptop" required></div>
+        <div class="fg"><label data-i18n="actDate"></label><input type="date" id="act-date"></div>
+        <div class="fg"><label data-i18n="actGroup"></label><input type="text" id="act-group" data-ph="phGroup" required></div>
+        <div class="fg"><label data-i18n="actDept"></label><select id="act-dept" onchange="deptLink()"></select>
+          <a id="dept-link" class="dept-link" target="_blank" rel="noopener"></a></div>
+      </div>
+      <h3 style="font-size:15px;margin-bottom:6px" data-i18n="checklist"></h3>
+      <div class="scroll"><table><thead><tr><th data-i18n="thComp"></th><th style="width:90px;text-align:center" data-i18n="thOk"></th><th data-i18n="thNotes"></th></tr></thead>
+      <tbody id="chk"></tbody></table></div>
+      <div class="comp hide" id="comp"></div>
+      <div class="law" data-i18n="law"></div>
+      <div class="fg"><label data-i18n="signature"></label><canvas id="sig" width="420" height="130"></canvas>
+        <div><button type="button" class="btn s" onclick="clearSig()" data-i18n="clear"></button></div></div>
+      <div style="text-align:right;margin-top:14px;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
+        <button type="button" class="btn o" onclick="window.print()"><i class="fa-solid fa-print"></i> <span data-i18n="print"></span></button>
+        <button type="submit" class="btn g"><i class="fa-solid fa-check-circle"></i> <span data-i18n="saveAct"></span></button>
+      </div>
+      <div class="hint" data-i18n="pdfHint"></div>
+    </form>
+    <h3 style="font-size:15px;margin:18px 0 6px" data-i18n="actsLog"></h3>
+    <div id="acts-log" class="muted"></div>
+  </div>
+
+  <!-- СТАТИСТИКА -->
+  <div id="tab-stat" class="card hide">
+    <h2><i class="fa-solid fa-chart-bar"></i><span data-i18n="titleStat"></span></h2>
+    <div id="dist"></div>
+    <h3 style="font-size:15px;margin:16px 0 6px" data-i18n="incidents"></h3>
+    <div id="incidents" class="muted"></div>
+  </div>
+
+  <!-- КАБИНЕТ СТУДЕНТА -->
+  <div id="tab-my" class="card hide">
+    <h2><i class="fa-solid fa-graduation-cap"></i><span data-i18n="titleMy"></span></h2>
+    <div id="my-body"></div>
+    <div style="margin-top:14px"><button class="btn o" onclick="openTicket()"><i class="fa-solid fa-headset"></i> <span data-i18n="tkBtn"></span></button></div>
+
+    <div class="my-sec">
+      <h3><i class="fa-solid fa-ticket"></i> <span data-i18n="tkMyTitle"></span></h3>
+      <div id="tk-my"></div>
+      <div id="tr-student"></div>
+    </div>
+
+    <div class="my-sec">
+      <h3><i class="fa-solid fa-laptop-code"></i> <span data-i18n="majTitle"></span></h3>
+      <div class="fg" style="max-width:420px"><label data-i18n="majLabel"></label><select id="major" onchange="renderCatalog()"></select></div>
+      <p class="muted" id="cat-desc" style="margin-top:10px"></p>
+      <div class="cat-grid" id="cat-grid"></div>
+      <p class="note-s" data-i18n="catNote"></p>
+    </div>
+    <div class="law" style="margin-top:14px"><b data-i18n="rulesT"></b><br><span data-i18n="rules"></span></div>
+  </div>
+</main>
+
+<!-- МОДАЛКА УСТРОЙСТВА -->
+<div class="modal" id="m-dev" onclick="if(event.target===this)closeM('m-dev')"><div class="mbody" id="m-dev-body"></div></div>
+
+<!-- МОДАЛКА ЗАЯВКИ СТУДЕНТА -->
+<div class="modal" id="m-ticket" onclick="if(event.target===this)closeM('m-ticket')">
+  <form class="mbody" onsubmit="submitTicket(event)">
+    <h3><i class="fa-solid fa-headset"></i> <span data-i18n="tkTitle"></span></h3>
+    <p class="muted"><b id="tk-who"></b></p>
+    <div class="fg" style="margin-bottom:12px"><label data-i18n="tkCat"></label>
+      <select id="tk-cat" style="width:100%;padding:10px" onchange="updateRouteHint()">
+        <optgroup data-i18n-label="toStaff">
+          <option value="sa1" data-i18n="sa1"></option><option value="sa2" data-i18n="sa2"></option><option value="sa3" data-i18n="sa3"></option>
+        </optgroup>
+        <optgroup data-i18n-label="toAdmin">
+          <option value="tc5" data-i18n="tc5"></option><option value="tc2" data-i18n="tc2"></option>
+        </optgroup>
+      </select>
+      <p class="muted" id="tk-route" style="margin:6px 0 0"></p></div>
+    <div class="fg" style="margin-bottom:12px"><label data-i18n="tkComment"></label>
+      <textarea id="tk-comment" rows="5" data-ph="tkPh"></textarea></div>
+    <p id="tk-err" class="auth-msg err hide"></p>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button type="button" class="btn s" onclick="closeM('m-ticket')" data-i18n="close"></button>
+      <button type="submit" class="btn o"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="tkSend"></span></button>
+    </div>
+  </form>
+</div>
+
+<!-- УДАЛЁННЫЙ СЕАНС ПО ЗАЯВКЕ (ANTI-ABUSE ENGINE) -->
+<div class="modal" id="m-remote">
+  <div class="mbody" style="max-width:860px;position:relative">
+    <h3><i class="fa-solid fa-satellite-dish"></i> <span data-i18n="rsTitle"></span></h3>
+    <div class="rs-meta">
+      <span class="chip up"><i class="dot"></i><span data-i18n="rsConsent"></span></span>
+      <span id="rs-who"></span>
+      <span><span data-i18n="rsTimerL"></span> <b id="rs-timer">15:00</b></span>
+    </div>
+    <div class="rs-ctl">
+      <span data-i18n="rsMode"></span>
+      <button type="button" id="rs-bv" class="btn s on" onclick="setRsMode('view')" data-i18n="rsView"></button>
+      <button type="button" id="rs-bc" class="btn s" onclick="setRsMode('control')" data-i18n="rsControl"></button>
+      <button type="button" class="btn g" onclick="applyFix()"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="rsFix"></span></button>
+    </div>
+    <div class="rs-screen">
+      <div class="rs-bar"><span><span class="rs-live">● LIVE</span> <span id="rs-dev"></span></span><span id="rs-stat">CPU 23% · 12 ms</span></div>
+      <div class="rs-desk" id="rs-desk" onmousemove="rsMove(event)" onclick="rsClick(event)">
+        <div class="rs-icons"><div><i class="fa-solid fa-folder"></i>Projects</div><div><i class="fa-solid fa-trash"></i>Bin</div><div><i class="fa-brands fa-chrome"></i>Browser</div></div>
+        <div class="rs-win"><div class="rs-wt"><span id="rs-wtitle"></span><span>— ▢ ✕</span></div><div class="rs-wb" id="rs-wbody"></div></div>
+        <div class="rs-prot"><div class="rs-blur">Documents<br>Downloads<br>Passwords.kdbx<br>Browser history</div><div class="rs-lock">🔒</div></div>
+        <div class="privacy-watermark" id="rs-wm" style="font-size:12px;top:auto;bottom:8px;right:12px"></div>
+        <div class="rs-cursor" id="rs-cur"></div>
+      </div>
+      <div class="rs-task"><span><i class="fa-brands fa-windows"></i> &nbsp; AITU Agent v2.4 · Anti-Abuse</span><span id="rs-clock"></span></div>
+    </div>
+    <div class="blur-folder" data-i18n="rsBlur"></div>
+    <h4 style="margin:10px 0 4px" data-i18n="rsLog"></h4>
+    <div class="term" id="rs-log" style="height:110px"></div>
+    <div style="text-align:right"><button class="btn btn-danger" onclick="closeRemote()" data-i18n="endSession"></button></div>
+  </div>
+</div>
+
+<!-- ОФИЦИАЛЬНОЕ УВЕДОМЛЕНИЕ СТУДЕНТУ -->
+<div class="modal" id="m-notice" style="z-index:2000">
+  <div class="mbody" style="border-top:5px solid #2e7d32;max-width:520px">
+    <h3 style="color:#2e7d32"><i class="fa-solid fa-circle-check"></i> <span data-i18n="noticeTitle"></span></h3>
+    <p class="muted"><b id="nt-id"></b></p>
+    <div class="law" style="background:#e8f5e9;border-color:#a5d6a7;color:#1b5e20;font-size:14px" id="nt-text"></div>
+    <div style="text-align:right"><button class="btn g" id="nt-ok" data-i18n="noticeOk"></button></div>
+  </div>
+</div>
+
+<div id="toasts"></div>
+
+<!-- МОДАЛЬНОЕ ОКНО УДАЛЕННОГО ДОСТУПА С ЗАЩИТОЙ ПРИВАТНОСТИ (BLUR MODE + WATERMARK) -->
+<div class="modal" id="m-term">
+  <div class="mbody" style="position:relative;max-width:650px">
+    <div class="privacy-watermark">AUDIT_SESSION_ID #99281 (Admin: Alikeyev)</div>
+    <h3><i class="fa-solid fa-terminal"></i> <span data-i18n="remoteTitle"></span> — <span id="term-id"></span></h3>
+    <p style="font-size:12px;color:#666">Автоматический таймер сеанса: <b id="timer">15:00</b> (Защита приватности активна)</p>
+    
+    <div class="term" id="term"></div>
+    
+    <div style="margin:10px 0;font-size:12px">
+      <b>Защита персональных данных студента (Blur Mode):</b>
+      <div class="blur-folder">🔒 [BLURRED] Загрузки / Документы / Браузер и пароли студента скрыты</div>
+    </div>
+
+    <div class="term-in"><span style="color:#0f0">&gt;</span><input type="text" id="term-cmd" data-ph="phCmd" onkeydown="if(event.key==='Enter')runCmd()"></div>
+    
+    <div style="text-align:right;margin-top:10px">
+      <button class="btn btn-danger" onclick="closeSession()" data-i18n="endSession">Завершить сеанс</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div>
+    <b>Unilaptop Enterprise SaaS © 2026</b> | Astana IT University
+    <div class="footer-disclaimer" data-i18n="disclaimer"></div>
+  </div>
+  <div data-i18n="footer"></div>
+</footer>
+
+<script>
+/* ===== МУЛЬТИЯЗЫЧНЫЙ СЛОВАРЬ (RU / KK / EN) ===== */
+const I18N={
+ru:{disclaimer:"⚠️ Данный веб-интерфейс является интерактивным прототипом системы Unilaptop для Astana IT University. Все данные тестовые.",
+tagline:"Система аренды и мониторинга",role:"Роль:",lang:"Язык:",support:"Тех. поддержка AITU",
+roleOwner:"🌐 Владелец Unilaptop",roleAdmin:"💻 Администратор (IT)",roleStaff:"📋 Отдел выдачи",roleStudent:"🎓 Студент",
+navOwner:"Глобальный фонд",navMon:"Мониторинг",navAct:"Акт приёма-передачи",navStat:"Статистика и учёт",navMy:"Мой ноутбук",
+heroTitle:"Бесплатная аренда ноутбуков для студентов",heroDesc:"Программа обеспечения студентов Astana IT University цифровыми устройствами с системой мониторинга и защитой приватности.",secure:"Защищенный доступ",
+stTotal:"Всего в фонде",stIssued:"Выдано в AITU",stOnline:"В сети сейчас",stBroken:"Сломано / в ремонте",
+titleMon:"Панель мониторинга парка AITU",descMon:"Статус подключения, установленное ПО и защищенный удаленный доступ к устройствам студентов.",
+search:"Поиск: ФИО, ID студента или S/N...",fAll:"Все статусы",fOnline:"В сети",fOffline:"Офлайн",fRepair:"В ремонте",
+thId:"Инв. № / S/N",thStudent:"Студент (AITU ID)",thStatus:"Статус",thSeen:"Посл. активность",thApps:"Приложения",thAction:"Действие",
+online:"В сети",offline:"Офлайн",repair:"В ремонте",now:"Только что",unapproved:"не разрешено",remote:"Удалённый доступ",unavail:"Недоступен",clickHint:"Нажмите на строку, чтобы открыть карточку устройства.",
+titleAct:"Электронный акт приёма-передачи",actType:"Тип процедуры:",tIssue:"Выдача ноутбука студенту",tReturn:"Возврат ноутбука в университет",
+actStudent:"ФИО студента / AITU ID:",actLaptop:"Инвентарный номер:",actDate:"Дата:",actGroup:"Название группы:",phGroup:"Напр.: SE-2301",actDept:"Департамент, курирующий группу:",pdfHint:"Для PDF: нажмите «Печать / PDF» и выберите «Сохранить как PDF».",phStudent:"Напр.: Аликеев Алмаз (231044)",phLaptop:"AITU-NB-0102",
+checklist:"Чек-лист технического состояния:",thComp:"Компонент",thOk:"Исправно",thNotes:"Замечания / дефекты",phNote:"Замечаний нет",
+c1:"Корпус и петли (без трещин и сколов)",c2:"Экран / матрица (без царапин и битых пикселей)",c3:"Клавиатура, тачпад, порты USB/Type-C",c4:"Зарядное устройство и кабель (65W)",
+compT:"Сумма компенсации ущерба (за счёт студента): ",law:"Юридическое условие: подписывая акт, студент подтверждает получение ноутбука в исправном состоянии. При порче, поломке по вине студента или утере (краже) студент возмещает стоимость ремонта или ноутбука.",
+signature:"Подпись студента (мышь / палец):",clear:"Очистить",print:"Печать / PDF",saveAct:"Подтвердить и сохранить",actsLog:"Журнал актов",noActs:"Актов пока нет.",
+needSign:"Поставьте подпись студента.",saved:"Акт сохранён.",issue:"Выдача",ret:"Возврат",
+titleStat:"Отчётность по оборудованию",dist:"Распределение парка",incidents:"Последние происшествия",inc1:"Повреждён экран — акт дефектации №44",inc2:"Ноутбук в ремонте, ущерб оформлен за счёт студента",
+titleMy:"Личный кабинет студента",model:"Модель",inv:"Инв. №",rent:"Период аренды",myActs:"Мои акты",actIn:"Акт выдачи (подписан ЭЦП)",
+rulesT:"Памятка студента",rules:"Ноутбук предоставляется бесплатно для учёбы. Защита приватности активна: администраторы не видят ваши личные файлы без разрешения.",
+devCard:"Карточка устройства",ip:"IP-адрес",battery:"Заряд батареи",ssd:"Свободно на SSD",cpu:"Нагрузка ЦП",close:"Закрыть",
+remoteTitle:"Удаленный доступ (Anti-Abuse Secure RDP)",endSession:"Завершить сеанс",phCmd:"Команда: help",
+t_conn:"Инициация защищенного туннеля с агентом...",t_ok:"Сеанс установлен. Активирован Blur Mode для личных папок.",t_help:"Команды: status, ping, reboot, lock, apps, clear, exit",t_unk:"Неизвестная команда: ",t_reboot:"Отправлена команда перезагрузки...",t_lock:"Экран заблокирован.",t_ping:"Ответ от устройства: время=",
+t_status:"Статус: ",footer:"Аренда ноутбуков + система мониторинга",
+structAitu:"Аренда Astana IT University (237 шт.)",structStock:"Общий резервный склад Unilaptop (763 шт.)",finMrr:"Месячная выручка (MRR):",finLoad:"Коэффициент загрузки парка:",finClients:"Активные организации-клиенты:",thOrg:"Организация",thAlloc:"Ноутбуков выделено",thContract:"Статус договора",thFee:"Месячная абонплата",pcs:"шт.",activeClient:"Активный клиент",logout:"Выйти",ownerTitle:"Глобальная панель управления фондом Unilaptop (SaaS Owner)",ownerDesc:"Учет всего оборудования в собственности компании и аналитика по клиенту Astana IT University.",structTitle:"Структура парка Unilaptop (Всего: 1,000 шт.)",finTitle:"Финансовые показатели AITU",tenantTitle:"Организации-Клиенты (Tenants)",
+kpiUtil:"Утилизация парка",kpiMrr:"MRR (выручка/мес.)",kpiAmort:"Амортизация / мес.",kpiTenants:"Активные тенанты",kpiTenantsSub:"Клиентов на платформе",kpiUtilSub:"Выделено клиентам из общего фонда",kpiAmortSub:"Ноутбук 450 000 ₸, срок 36 мес.",finNet:"Операционная маржа (MRR − амортизация):",finArpu:"ARPU на 1 ноутбук:",finNote:"Демо-расчёт: стоимость ноутбука 450 000 ₸, линейная амортизация 36 мес.",healthTitle:"Состояние парка AITU",alertsTitle:"Требуют внимания",alOffline:"Устройства офлайн",alRepair:"Устройства в ремонте",alSoft:"Неутверждённое ПО",alNone:"Критичных событий нет",thUtil:"Использование",apiOn:"Бэкенд API: онлайн",apiOff:"Бэкенд API: недоступен",apiCheck:"Бэкенд API: проверка...",stIssuedS:"Выдано",stStock:"На складе",
+authSub:"Платформа аренды ноутбуков и защиты данных",
+tabLogin:"Вход",
+tabReg:"Регистрация",
+tabForgot:"Забыл пароль",
+lblRole:"Роль в системе:",
+lrOwner:"🌐 Владелец Unilaptop (SaaS Super Admin)",
+lrAdmin:"💻 IT Администратор AITU (Мониторинг)",
+lrStaff:"📋 Сотрудник выдачи AITU (Склад / Акты)",
+lrStudent:"🎓 Студент AITU (Аликеев Алмаз)",
+lblUser:"Логин / AITU ID / Email:",
+lblPass:"Пароль",
+lblPass2:"Повторите пароль",
+btnLogin:"Войти в систему",
+btnReg:"Зарегистрироваться",
+lblRegId:"AITU ID / Email",
+lblTg:"Telegram Tag (@username)",
+tgHint:"Для системных уведомлений и двухфакторной аутентификации",
+lblForgot:"Telegram Tag или Email",
+btnSendCode:"Отправить код в Telegram",
+lblCode:"Код из Telegram",
+lblNewPass:"Новый пароль",
+btnReset:"Сбросить пароль",
+msgCodeSent:"Код сброса отправлен в Telegram",
+msgRegOk:"Аккаунт создан. Войдите в систему.",
+msgResetOk:"Пароль обновлён. Войдите с новым паролем.",
+tgBotMsg:"🤖 Unilaptop Bot — код сброса: ",
+errFill:"Заполните все поля",
+errFormat:"Введите Telegram Tag (@username) или Email",
+errTg:"Telegram Tag должен начинаться с @ (5–32 символа, например @almaz_a)",
+errPassLen:"Пароль — минимум 6 символов",
+errPassMatch:"Пароли не совпадают",
+errExists:"Такой AITU ID / Email уже зарегистрирован",
+errLogin:"Неверный пароль",
+errCode:"Неверный или просроченный код",
+authFoot:"Защита проекта Astana IT University 2026",
+tkBtn:"Оставить заявку / Запросить доступ",
+tkTitle:"Заявка в IT-поддержку",
+tkCat:"Тип проблемы / доступа",
+tc1:"Установка ПО / Снятие административных ограничений OS",
+tc2:"Запрос административных прав / Виртуализация",
+tc3:"Ошибка агента безопасности (Blur Mode / Anti-Abuse)",
+tc4:"Установка софта для GameDev / 3D-графики",
+tc5:"Техническая неполадка / Сбой ПО",
+tkComment:"Описание проблемы",
+tkPh:"Опишите, что произошло и что нужно сделать...",
+tkSend:"Отправить заявку",
+tkPush:"Ваша заявка отправлена: ",
+tkProcessing:"В обработке",
+tkConnected:"Идёт сеанс",
+tkDone:"Решена",
+tkMyTitle:"Мои заявки",
+tkNone:"Заявок пока нет",
+errComment:"Опишите проблему",
+tkSolved:"Ваша заявка решена",
+tkNewPush:"Новая заявка от студента",
+bellTip:"Новые заявки студентов",
+deskTitle:"Поступившие заявки студентов",
+deskNew:"Новых заявок: ",
+deskEmpty:"Заявок нет",
+tkDevice:"Устройство",
+btnRemote:"⚡ Подключиться к экрану (Remote Session)",
+btnResolve:"Закрыть заявку",
+rsTitle:"Удалённый сеанс — Anti-Abuse Engine",
+rsConsent:"Согласие студента: получено через заявку",
+rsTimerL:"До завершения сеанса:",
+rsMode:"Режим:",
+rsView:"Просмотр",
+rsControl:"Управление",
+rsFix:"Применить исправление",
+rsBlur:"🔒 Личные файлы, браузер и пароли студента скрыты (Blur Mode)",
+rsLog:"Аудит сеанса",
+rsLogStart:"Сеанс начат по заявке",
+rsLogMode:"Режим переключён: ",
+rsViewOnly:"Режим просмотра: управление отключено",
+rsFixed:"Исправление применено, заявка закрыта",
+rsBlocked:"Доступ к защищённой области заблокирован (Blur Mode)",
+rsNoDevice:"У студента нет выданного устройства",
+majTitle:"Подбор ноутбука по образовательной программе",
+majLabel:"Образовательная программа (Major)",
+majHigh:"Требовательные специальности",
+majBase:"Базовые специальности",
+catHighDesc:"Мощные рабочие станции: 32 GB RAM, дискретная GPU, поддержка виртуализации (Docker / WSL2 / Hyper-V).",
+catBaseDesc:"Лёгкие энергоэффективные ультрабуки: 16 GB RAM, длительная работа от батареи для презентаций и кода.",
+catBtn:"Запросить конфигурацию",
+catVirt:"Виртуализация",
+catBat:"Батарея",
+catRent:"Аренда / мес.",
+catNote:"Демо-каталог: конфигурации и цены ориентировочные.",
+catFound:"Подходит конфигураций: ",
+catReqPrefix:"Запрос конфигурации",
+noDevice:"Ноутбук ещё не выдан. Подберите конфигурацию в каталоге ниже.",
+sa1:"Получить ноутбук / Запрос конфигурации",
+sa2:"Сдать ноутбук / Возврат",
+sa3:"Замена устройства",
+toStaff:"Отдел выдачи",
+toAdmin:"IT-администратор",
+routeTo:"Заявка будет отправлена: ",
+tkApproved:"Одобрено",
+btnApprove:"Одобрить заявку",
+stDeskTitle:"Входящие заявки студентов",
+noticeTitle:"Официальное уведомление Unilaptop",
+noticeOk:"Понятно",
+nt1:"Ваша заявка одобрена! Вам необходимо подойти в кабинет C1.1.341 для заполнения бумажного бланка заявки на присвоение ноутбука и проверки работоспособности оборудования.",
+nt2:"Ваша заявка одобрена! Для сдачи ноутбука подойдите в кабинет C1.1.341 для проверки оборудования и оформления возврата.",
+nt3:"Ваша заявка одобрена! Для замены устройства подойдите в кабинет C1.1.341 для проверки оборудования и оформления замены.",
+tkRejected:"Отклонено",
+btnReject:"Отклонить",
+tkRejectedMsg:"Ваша заявка отклонена",
+trashTitle:"Корзина",
+trashHint:"Перетащите сюда закрытую, обработанную или отклонённую заявку",
+trashEmpty:"Корзина пуста",
+trashRestore:"Восстановить",
+trashIn:"В корзину",
+trashLeft:"Удалится через ",
+daysShort:"дн.",
+trashOnly:"В корзину можно переместить только закрытые, обработанные или отклонённые заявки",
+trashNote:"Заявки в корзине автоматически удаляются через 30 дней"},
+kk:{disclaimer:"⚠️ Бұл веб-интерфейс Astana IT University үшін Unilaptop жүйесінің интерактивті прототипі болып табылады.",
+tagline:"Жалға беру және мониторинг жүйесі",role:"Рөл:",lang:"Тіл:",support:"AITU тех. қолдау",
+roleOwner:"🌐 Unilaptop Овнері",roleAdmin:"💻 Әкімші (IT)",roleStaff:"📋 Беру бөлімі",roleStudent:"🎓 Студент",
+navOwner:"Жаһандық қойма",navMon:"Мониторинг",navAct:"Қабылдау-өткізу актісі",navStat:"Статистика",navMy:"Менің ноутбугім",
+heroTitle:"Студенттерге ноутбуктерді тегін жалға беру",heroDesc:"Astana IT University студенттерін құрылғылармен қамтамасыз ету бағдарламасы.",secure:"Қауіпсіз қолжетімділік",
+stTotal:"Барлық қорында",stIssued:"AITU берілгені",stOnline:"Қазір желіде",stBroken:"Сынған / жөндеуде",
+titleMon:"Парк мониторингі панелі",descMon:"Қосылу күйі және қауіпсіз қашықтан қол жеткізу.",
+search:"Іздеу: ТАӘ, студент ID немесе S/N...",fAll:"Барлық күй",fOnline:"Желіде",fOffline:"Офлайн",fRepair:"Жөндеуде",
+thId:"Инв. № / S/N",thStudent:"Студент (AITU ID)",thStatus:"Күйі",thSeen:"Соңғы белсенділік",thApps:"Қолданбалар",thAction:"Әрекет",
+online:"Желіде",offline:"Офлайн",repair:"Жөндеуде",now:"Дәл қазір",unapproved:"рұқсат етілмеген",remote:"Қашықтан қосылу",unavail:"Қолжетімсіз",clickHint:"Құрылғы картасын ашу үшін басыңыз.",
+titleAct:"Электрондық қабылдау-өткізу актісі",actType:"Рәсім түрі:",tIssue:"Ноутбукті студентке беру",tReturn:"Ноутбукті университетке қайтару",
+actStudent:"Студенттің ТАӘ / AITU ID:",actLaptop:"Инвентарлық нөмір:",actDate:"Күні:",actGroup:"Топ атауы:",phGroup:"Мыс.: SE-2301",actDept:"Департамент:",pdfHint:"PDF үшін «Басып шығару / PDF» таңдаңыз.",phStudent:"Мыс.: Әлікеев Алмаз (231044)",phLaptop:"AITU-NB-0102",
+checklist:"Техникалық жағдай тексеру парағы:",thComp:"Компонент",thOk:"Дұрыс",thNotes:"Ескертулер / ақаулар",phNote:"Ескертпе жоқ",
+c1:"Корпус және топсалар (жарықсыз)",c2:"Экран / матрица (сызатсыз)",c3:"Пернетақта, тачпад, USB/Type-C",c4:"Зарядтағыш және кабель (65W)",
+compT:"Залалды өтеу сомасы (студент есебінен): ",law:"Құқықтық шарт: актіге қол қою арқылы студент жарамды күйде алғанын растайды.",
+signature:"Студент қолтаңбасы:",clear:"Тазарту",print:"Басып шығару / PDF",saveAct:"Растау және сақтау",actsLog:"Актілер журналы",noActs:"Актілер әзірше жоқ.",
+needSign:"Студент қолын қойыңыз.",saved:"Акт сақталды.",issue:"Беру",ret:"Қайтару",
+titleStat:"Жабдық бойынша есептілік",dist:"Паркті бөлу",incidents:"Соңғы оқиғалар",inc1:"Экран зақымданды — ақау актісі №44",inc2:"Ноутбук жөндеуде",
+titleMy:"Студенттің жеке кабинеті",model:"Моделі",inv:"Инв. №",rent:"Жалға алу кезеңі",myActs:"Менің актілерім",actIn:"Беру актісі",
+rulesT:"Студентке ескерту",rules:"Ноутбук оқу үшін тегін беріледі.",
+devCard:"Құрылғы картасы",ip:"IP-мекенжай",battery:"Батарея заряды",ssd:"SSD бос орны",cpu:"ЦП жүктемесі",close:"Жабу",
+remoteTitle:"Қашықтан қолжетімділік",endSession:"Сеансты аяқтау",phCmd:"Команда: help",
+t_conn:"Байланыс орнатылуда...",t_ok:"Сеанс сәтті орнатылды.",t_help:"Командалар: status, ping, reboot, lock, apps, clear, exit",t_unk:"Белгісіз команда: ",t_reboot:"Қайта жүктеу...",t_lock:"Экран құлыпталды.",t_ping:"Жауап уақыты=",
+t_status:"Күйі: ",footer:"Ноутбук жалға беру жүйесі",
+structAitu:"Astana IT University жалға алуы (237 дана)",structStock:"Unilaptop жалпы резервтік қоймасы (763 дана)",finMrr:"Айлық түсім (MRR):",finLoad:"Парктің жүктелу коэффициенті:",finClients:"Белсенді клиент-ұйымдар:",thOrg:"Ұйым",thAlloc:"Бөлінген ноутбуктер",thContract:"Шарт күйі",thFee:"Айлық абоненттік төлем",pcs:"дана",activeClient:"Белсенді клиент",logout:"Шығу",ownerTitle:"Unilaptop қорын басқарудың жаһандық панелі (SaaS Owner)",ownerDesc:"Компания меншігіндегі барлық жабдықты есепке алу және Astana IT University клиенті бойынша талдау.",structTitle:"Unilaptop паркінің құрылымы (Барлығы: 1,000 дана)",finTitle:"AITU қаржылық көрсеткіштері",tenantTitle:"Клиент-Ұйымдар (Tenants)",
+kpiUtil:"Парк утилизациясы",kpiMrr:"MRR (түсім/ай)",kpiAmort:"Амортизация / ай",kpiTenants:"Белсенді тенанттар",kpiTenantsSub:"Платформадағы клиенттер",kpiUtilSub:"Жалпы қордан клиентке бөлінген",kpiAmortSub:"Ноутбук 450 000 ₸, мерзімі 36 ай",finNet:"Операциялық маржа (MRR − амортизация):",finArpu:"1 ноутбукке ARPU:",finNote:"Демо есеп: ноутбук құны 450 000 ₸, 36 айға сызықтық амортизация.",healthTitle:"AITU паркінің күйі",alertsTitle:"Назар аударуды қажет етеді",alOffline:"Офлайн құрылғылар",alRepair:"Жөндеудегі құрылғылар",alSoft:"Бекітілмеген БЖ",alNone:"Критикалық оқиғалар жоқ",thUtil:"Пайдаланылуы",apiOn:"Бэкенд API: онлайн",apiOff:"Бэкенд API: қолжетімсіз",apiCheck:"Бэкенд API: тексерілуде...",stIssuedS:"Берілген",stStock:"Қоймада",
+authSub:"Ноутбук жалдау және деректерді қорғау платформасы",
+tabLogin:"Кіру",
+tabReg:"Тіркелу",
+tabForgot:"Құпиясөзді ұмыттым",
+lblRole:"Жүйедегі рөл:",
+lrOwner:"🌐 Unilaptop иесі (SaaS Super Admin)",
+lrAdmin:"💻 AITU IT әкімшісі (Мониторинг)",
+lrStaff:"📋 AITU беру қызметкері (Қойма / Актілер)",
+lrStudent:"🎓 AITU студенті (Аликеев Алмаз)",
+lblUser:"Логин / AITU ID / Email:",
+lblPass:"Құпиясөз",
+lblPass2:"Құпиясөзді қайталаңыз",
+btnLogin:"Жүйеге кіру",
+btnReg:"Тіркелу",
+lblRegId:"AITU ID / Email",
+lblTg:"Telegram Tag (@username)",
+tgHint:"Жүйелік хабарламалар мен екі факторлы аутентификация үшін",
+lblForgot:"Telegram Tag немесе Email",
+btnSendCode:"Кодты Telegram-ға жіберу",
+lblCode:"Telegram-дағы код",
+lblNewPass:"Жаңа құпиясөз",
+btnReset:"Құпиясөзді қалпына келтіру",
+msgCodeSent:"Қалпына келтіру коды Telegram-ға жіберілді",
+msgRegOk:"Аккаунт жасалды. Жүйеге кіріңіз.",
+msgResetOk:"Құпиясөз жаңартылды. Жаңа құпиясөзбен кіріңіз.",
+tgBotMsg:"🤖 Unilaptop Bot — қалпына келтіру коды: ",
+errFill:"Барлық өрістерді толтырыңыз",
+errFormat:"Telegram Tag (@username) немесе Email енгізіңіз",
+errTg:"Telegram Tag @ белгісінен басталуы керек (5–32 таңба, мысалы @almaz_a)",
+errPassLen:"Құпиясөз — кемінде 6 таңба",
+errPassMatch:"Құпиясөздер сәйкес емес",
+errExists:"Мұндай AITU ID / Email тіркелген",
+errLogin:"Қате құпиясөз",
+errCode:"Қате немесе мерзімі өткен код",
+authFoot:"Astana IT University жобасын қорғау 2026",
+tkBtn:"Өтінім қалдыру / Қолжетімділік сұрау",
+tkTitle:"IT-қолдауға өтінім",
+tkCat:"Мәселе / қолжетімділік түрі",
+tc1:"БЖ орнату / ОЖ әкімшілік шектеулерін алу",
+tc2:"Әкімшілік құқықтарды сұрау / Виртуализация",
+tc3:"Қауіпсіздік агентінің қатесі (Blur Mode / Anti-Abuse)",
+tc4:"GameDev / 3D-графика БЖ орнату",
+tc5:"Техникалық ақау / БЖ ақауы",
+tkComment:"Мәселенің сипаттамасы",
+tkPh:"Не болғанын және не істеу керегін сипаттаңыз...",
+tkSend:"Өтінімді жіберу",
+tkPush:"Сіздің өтінімңіз жіберілді: ",
+tkProcessing:"Өңделуде",
+tkConnected:"Сеанс жүруде",
+tkDone:"Шешілді",
+tkMyTitle:"Менің өтініштерім",
+tkNone:"Әзірге өтініш жоқ",
+errComment:"Мәселені сипаттаңыз",
+tkSolved:"Сіздің өтінімңіз шешілді",
+tkNewPush:"Студенттен жаңа өтінім",
+bellTip:"Студенттердің жаңа өтініштері",
+deskTitle:"Студенттерден келіп түскен өтініштер",
+deskNew:"Жаңа өтініштер: ",
+deskEmpty:"Өтініштер жоқ",
+tkDevice:"Құрылғы",
+btnRemote:"⚡ Экранға қосылу (Remote Session)",
+btnResolve:"Өтінімді жабу",
+rsTitle:"Қашықтан сеанс — Anti-Abuse Engine",
+rsConsent:"Студент келісімі: өтінім арқылы алынды",
+rsTimerL:"Сеанс аяқталуына дейін:",
+rsMode:"Режим:",
+rsView:"Қарау",
+rsControl:"Басқару",
+rsFix:"Түзетуді қолдану",
+rsBlur:"🔒 Студенттің жеке файлдары, браузері және құпиясөздері жасырылған (Blur Mode)",
+rsLog:"Сеанс аудиті",
+rsLogStart:"Сеанс өтінім бойынша басталды",
+rsLogMode:"Режим ауыстырылды: ",
+rsViewOnly:"Қарау режимі: басқару өшірулі",
+rsFixed:"Түзету қолданылды, өтінім жабылды",
+rsBlocked:"Қорғалған аймаққа қолжетімділік бұғатталды (Blur Mode)",
+rsNoDevice:"Студентте берілген құрылғы жоқ",
+majTitle:"Білім беру бағдарламасы бойынша ноутбук таңдау",
+majLabel:"Білім беру бағдарламасы (Major)",
+majHigh:"Жоғары талапты мамандықтар",
+majBase:"Базалық мамандықтар",
+catHighDesc:"Қуатты жұмыс станциялары: 32 GB RAM, дискретті GPU, виртуализацияны қолдау (Docker / WSL2 / Hyper-V).",
+catBaseDesc:"Жеңіл энергия үнемдейтін ультрабуктер: 16 GB RAM, презентациялар мен код үшін ұзақ батарея.",
+catBtn:"Конфигурацияны сұрау",
+catVirt:"Виртуализация",
+catBat:"Батарея",
+catRent:"Жалға алу / ай",
+catNote:"Демо-каталог: конфигурациялар мен бағалар болжамды.",
+catFound:"Сәйкес конфигурациялар: ",
+catReqPrefix:"Конфигурацияны сұрау",
+noDevice:"Ноутбук әлі берілмеген. Төмендегі каталогтан конфигурацияны таңдаңыз.",
+sa1:"Ноутбук алу / Конфигурация сұрау",
+sa2:"Ноутбукті тапсыру / Қайтару",
+sa3:"Құрылғыны ауыстыру",
+toStaff:"Беру бөлімі",
+toAdmin:"IT әкімшісі",
+routeTo:"Өтінім жіберіледі: ",
+tkApproved:"Мақұлданды",
+btnApprove:"Өтінімді мақұлдау",
+stDeskTitle:"Студенттердің кіріс өтініштері",
+noticeTitle:"Unilaptop ресми хабарламасы",
+noticeOk:"Түсінікті",
+nt1:"Сіздің өтінімңіз мақұлданды! Ноутбукті бекіту туралы өтінімнің қағаз бланкін толтыру және жабдықтың жұмысқа қабілеттілігін тексеру үшін C1.1.341 кабинетіне келуіңіз қажет.",
+nt2:"Сіздің өтінімңіз мақұлданды! Ноутбукті тапсыру үшін жабдықты тексеру және қайтаруды рәсімдеу мақсатында C1.1.341 кабинетіне келіңіз.",
+nt3:"Сіздің өтінімңіз мақұлданды! Құрылғыны ауыстыру үшін жабдықты тексеру және ауыстыруды рәсімдеу мақсатында C1.1.341 кабинетіне келіңіз.",
+tkRejected:"Қабылданбады",
+btnReject:"Қабылдамау",
+tkRejectedMsg:"Сіздің өтінімңіз қабылданбады",
+trashTitle:"Себет",
+trashHint:"Жабылған, өңделген немесе қабылданбаған өтінімді осында сүйреңіз",
+trashEmpty:"Себет бос",
+trashRestore:"Қалпына келтіру",
+trashIn:"Себетке",
+trashLeft:"Жойылады: ",
+daysShort:"күн",
+trashOnly:"Себетке тек жабылған, өңделген немесе қабылданбаған өтініштерді ғана жылжытуға болады",
+trashNote:"Себеттегі өтініштер 30 күннен кейін автоматты түрде жойылады"},
+en:{disclaimer:"⚠️ This web interface is an interactive prototype of the Unilaptop system for Astana IT University.",
+tagline:"Rental and monitoring system",role:"Role:",lang:"Language:",support:"AITU Tech Support",
+roleOwner:"🌐 Unilaptop Owner",roleAdmin:"💻 Administrator (IT)",roleStaff:"📋 Issuance Desk",roleStudent:"🎓 Student",
+navOwner:"Global Fleet",navMon:"Monitoring",navAct:"Transfer Act",navStat:"Statistics",navMy:"My Laptop",
+heroTitle:"Free Laptop Rental for Students",heroDesc:"A program providing Astana IT University students with digital devices and privacy protection.",secure:"Secure Access",
+stTotal:"Total Fleet",stIssued:"Issued to AITU",stOnline:"Online Now",stBroken:"Under Repair",
+titleMon:"Fleet Monitoring Panel (AITU)",descMon:"Connection status, installed software and secure remote access.",
+search:"Search: name, student ID or S/N...",fAll:"All statuses",fOnline:"Online",fOffline:"Offline",fRepair:"In repair",
+thId:"Inv. # / S/N",thStudent:"Student (AITU ID)",thStatus:"Status",thSeen:"Last seen",thApps:"Apps",thAction:"Action",
+online:"Online",offline:"Offline",repair:"In repair",now:"Just now",unapproved:"unapproved",remote:"Remote access",unavail:"Unavailable",clickHint:"Click a row to open device card.",
+titleAct:"Digital Laptop Transfer Act",actType:"Procedure type:",tIssue:"Issue laptop to student",tReturn:"Return laptop to university",
+actStudent:"Student name / AITU ID:",actLaptop:"Inventory number:",actDate:"Date:",actGroup:"Group name:",phGroup:"E.g.: SE-2301",actDept:"Department:",pdfHint:"For PDF: click “Print / PDF”.",phStudent:"E.g.: Аликеев Алмаз (231044)",phLaptop:"AITU-NB-0102",
+checklist:"Technical condition checklist:",thComp:"Component",thOk:"Working",thNotes:"Remarks / defects",phNote:"No remarks",
+c1:"Case and hinges (no cracks)",c2:"Screen / panel (no scratches)",c3:"Keyboard, touchpad, ports",c4:"Charger & power cable (65W)",
+compT:"Damage compensation (at student's expense): ",law:"Legal provision: by signing, the student confirms receiving the laptop in working order.",
+signature:"Student signature:",clear:"Clear",print:"Print / PDF",saveAct:"Confirm and save",actsLog:"Acts log",noActs:"No acts yet.",
+needSign:"Please add the student's signature.",saved:"Act saved.",issue:"Issue",ret:"Return",
+titleStat:"Equipment Reporting",dist:"Fleet distribution",incidents:"Recent incidents",inc1:"Screen damaged — defect act #44",inc2:"Laptop in repair",
+titleMy:"Student Portal",model:"Model",inv:"Inv. #",rent:"Rental period",myActs:"My acts",actIn:"Issue act",
+rulesT:"Student notice",rules:"The laptop is provided free for studying.",
+devCard:"Device card",ip:"IP address",battery:"Battery",ssd:"Free SSD space",cpu:"CPU load",close:"Close",
+remoteTitle:"Secure Remote Access (Anti-Abuse)",endSession:"End session",phCmd:"Command: help",
+t_conn:"Connecting to agent...",t_ok:"Session established. Blur Mode active.",t_help:"Commands: status, ping, reboot, lock, apps, clear, exit",t_unk:"Unknown command: ",t_reboot:"Reboot command sent...",t_lock:"Screen locked.",t_ping:"Reply time=",
+t_status:"Status: ",footer:"Laptop rental + monitoring system",
+structAitu:"Astana IT University rental (237 pcs.)",structStock:"Unilaptop general reserve stock (763 pcs.)",finMrr:"Monthly revenue (MRR):",finLoad:"Fleet utilization rate:",finClients:"Active client organizations:",thOrg:"Organization",thAlloc:"Laptops allocated",thContract:"Contract status",thFee:"Monthly fee",pcs:"pcs.",activeClient:"Active client",logout:"Logout",ownerTitle:"Global Fleet Management Panel (SaaS Owner)",ownerDesc:"Accounting of all equipment owned by the company and analytics for client Astana IT University.",structTitle:"Unilaptop Fleet Structure (Total: 1,000 pcs.)",finTitle:"AITU Financial Indicators",tenantTitle:"Client Organizations (Tenants)",
+kpiUtil:"Fleet utilization",kpiMrr:"MRR (monthly revenue)",kpiAmort:"Depreciation / mo.",kpiTenants:"Active tenants",kpiTenantsSub:"Clients on the platform",kpiUtilSub:"Allocated to clients from the total fleet",kpiAmortSub:"Laptop 450,000 ₸, 36-month life",finNet:"Operating margin (MRR − depreciation):",finArpu:"ARPU per laptop:",finNote:"Demo calculation: laptop cost 450,000 ₸, straight-line depreciation over 36 months.",healthTitle:"AITU fleet health",alertsTitle:"Needs attention",alOffline:"Offline devices",alRepair:"Devices in repair",alSoft:"Unapproved software",alNone:"No critical events",thUtil:"Usage",apiOn:"Backend API: online",apiOff:"Backend API: unreachable",apiCheck:"Backend API: checking...",stIssuedS:"Issued",stStock:"In stock",
+authSub:"Laptop rental and data protection platform",
+tabLogin:"Sign in",
+tabReg:"Register",
+tabForgot:"Forgot password",
+lblRole:"System role:",
+lrOwner:"🌐 Unilaptop Owner (SaaS Super Admin)",
+lrAdmin:"💻 AITU IT Administrator (Monitoring)",
+lrStaff:"📋 AITU Issuance Staff (Warehouse / Acts)",
+lrStudent:"🎓 AITU Student (Alikeyev Almaz)",
+lblUser:"Login / AITU ID / Email:",
+lblPass:"Password",
+lblPass2:"Repeat password",
+btnLogin:"Sign in",
+btnReg:"Create account",
+lblRegId:"AITU ID / Email",
+lblTg:"Telegram Tag (@username)",
+tgHint:"For system notifications and two-factor authentication",
+lblForgot:"Telegram Tag or Email",
+btnSendCode:"Send code to Telegram",
+lblCode:"Code from Telegram",
+lblNewPass:"New password",
+btnReset:"Reset password",
+msgCodeSent:"Reset code has been sent to Telegram",
+msgRegOk:"Account created. Please sign in.",
+msgResetOk:"Password updated. Sign in with the new password.",
+tgBotMsg:"🤖 Unilaptop Bot — reset code: ",
+errFill:"Fill in all fields",
+errFormat:"Enter a Telegram tag (@username) or an email",
+errTg:"Telegram tag must start with @ (5–32 chars, e.g. @almaz_a)",
+errPassLen:"Password must be at least 6 characters",
+errPassMatch:"Passwords do not match",
+errExists:"This AITU ID / Email is already registered",
+errLogin:"Wrong password",
+errCode:"Invalid or expired code",
+authFoot:"Astana IT University project defense 2026",
+tkBtn:"Submit request / Request access",
+tkTitle:"IT support request",
+tkCat:"Issue / access type",
+tc1:"Software installation / Lifting OS admin restrictions",
+tc2:"Administrator rights request / Virtualization",
+tc3:"Security agent error (Blur Mode / Anti-Abuse)",
+tc4:"GameDev / 3D graphics software installation",
+tc5:"Technical fault / Software failure",
+tkComment:"Problem description",
+tkPh:"Describe what happened and what you need...",
+tkSend:"Submit request",
+tkPush:"Your request was sent to: ",
+tkProcessing:"Processing",
+tkConnected:"Session in progress",
+tkDone:"Resolved",
+tkMyTitle:"My requests",
+tkNone:"No requests yet",
+errComment:"Describe the problem",
+tkSolved:"Your request has been resolved",
+tkNewPush:"New student request",
+bellTip:"New student requests",
+deskTitle:"Incoming student requests",
+deskNew:"New requests: ",
+deskEmpty:"No requests",
+tkDevice:"Device",
+btnRemote:"⚡ Connect to screen (Remote Session)",
+btnResolve:"Close request",
+rsTitle:"Remote session — Anti-Abuse Engine",
+rsConsent:"Student consent: granted via request",
+rsTimerL:"Session ends in:",
+rsMode:"Mode:",
+rsView:"View only",
+rsControl:"Control",
+rsFix:"Apply fix",
+rsBlur:"🔒 Student's personal files, browser and passwords are hidden (Blur Mode)",
+rsLog:"Session audit",
+rsLogStart:"Session started from request",
+rsLogMode:"Mode switched: ",
+rsViewOnly:"View-only mode: control is disabled",
+rsFixed:"Fix applied, request closed",
+rsBlocked:"Access to the protected area is blocked (Blur Mode)",
+rsNoDevice:"The student has no issued device",
+majTitle:"Laptop selection by academic program",
+majLabel:"Academic program (Major)",
+majHigh:"Demanding programs",
+majBase:"Standard programs",
+catHighDesc:"High-performance workstations: 32 GB RAM, discrete GPU, virtualization support (Docker / WSL2 / Hyper-V).",
+catBaseDesc:"Light energy-efficient ultrabooks: 16 GB RAM, long battery life for presentations and coding.",
+catBtn:"Request configuration",
+catVirt:"Virtualization",
+catBat:"Battery",
+catRent:"Rent / mo.",
+catNote:"Demo catalog: configurations and prices are indicative.",
+catFound:"Matching configurations: ",
+catReqPrefix:"Configuration request",
+noDevice:"No laptop issued yet. Pick a configuration from the catalog below.",
+sa1:"Get a laptop / Configuration request",
+sa2:"Return a laptop / Return request",
+sa3:"Device replacement",
+toStaff:"Issuance Office",
+toAdmin:"IT Administrator",
+routeTo:"The request will be sent to: ",
+tkApproved:"Approved",
+btnApprove:"Approve request",
+stDeskTitle:"Incoming student requests",
+noticeTitle:"Official Unilaptop notification",
+noticeOk:"Got it",
+nt1:"Your request has been approved! Please come to room C1.1.341 to fill out the paper application form for laptop assignment and to check that the equipment works properly.",
+nt2:"Your request has been approved! To return the laptop, please come to room C1.1.341 for an equipment check and return processing.",
+nt3:"Your request has been approved! For the device replacement, please come to room C1.1.341 for an equipment check and replacement processing.",
+tkRejected:"Rejected",
+btnReject:"Reject",
+tkRejectedMsg:"Your request was rejected",
+trashTitle:"Trash",
+trashHint:"Drag a closed, processed or rejected request here",
+trashEmpty:"Trash is empty",
+trashRestore:"Restore",
+trashIn:"Move to trash",
+trashLeft:"Deleted in ",
+daysShort:"d",
+trashOnly:"Only closed, processed or rejected requests can be moved to the trash",
+trashNote:"Requests in the trash are deleted automatically after 30 days"}
+};
+let L='ru';const t=k=>I18N[L][k]||k;
+
+/* ===== ДАННЫЕ НОУТБУКОВ (ПАРК AITU) ===== */
+const FLEET=[
+{id:"AITU-NB-0102",sn:"88A92F11",st:"Аликеев Алмаз",sid:"231044",s:"online",seen:null,apps:["VS Code","Docker","Python 3.11"],ip:"10.20.4.12",bat:84,ssd:212,cpu:23},
+{id:"AITU-NB-0103",sn:"88A92F12",st:"Ахметов Данияр",sid:"231089",s:"offline",seen:"19.10.2026 14:20",apps:["MS Office","!Steam"],ip:"10.20.4.31",bat:12,ssd:98,cpu:0},
+{id:"AITU-NB-0104",sn:"88A92F15",st:"Смагулов Тимур",sid:"231102",s:"repair",seen:"15.10.2026 09:10",apps:["IntelliJ IDEA","PostgreSQL"],ip:"—",bat:0,ssd:140,cpu:0},
+{id:"AITU-NB-0105",sn:"88A92F20",st:"Оспанова Алия",sid:"231155",s:"online",seen:null,apps:["Figma","VS Code","Node.js"],ip:"10.20.5.7",bat:61,ssd:180,cpu:41},
+{id:"AITU-NB-0106",sn:"88A92F23",st:"Искаков Максат",sid:"231170",s:"online",seen:null,apps:["Chrome","Git","Python 3.11"],ip:"10.20.5.19",bat:92,ssd:240,cpu:15},
+{id:"AITU-NB-0107",sn:"88A92F27",st:"Нурланова Дана",sid:"231201",s:"offline",seen:"18.10.2026 21:05",apps:["MS Office","Zoom"],ip:"10.20.6.3",bat:35,ssd:160,cpu:0},
+{id:"AITU-NB-0108",sn:"88A92F31",st:"Касымов Ерлан",sid:"231233",s:"online",seen:null,apps:["Android Studio","!Discord"],ip:"10.20.6.44",bat:70,ssd:120,cpu:57},
+{id:"AITU-NB-0109",sn:"88A92F34",st:"—",sid:"",s:"stock",seen:null,apps:[],ip:"—",bat:100,ssd:450,cpu:0}
+];
+
+const DEPTS=[
+["Департамент стратегии, качества и корпоративного управления","Стратегия, сапа және корпоративтік басқару департаменті","Department of Strategy, Quality and Corporate Governance","Department-strategy"],
+["Департамент академической деятельности","Академиялық қызмет департаменті","Department of Academic Affairs","academic-department"],
+["Учебно-методический отдел","Оқу-әдістемелік бөлім","Educational and Methodological Department","educational-methodological-dep"],
+["Студенческий отдел","Студенттер бөлімі","Student Affairs Office","student-dep"],
+["Департамент технического обеспечения и сопровождения","Техникалық қамтамасыз ету және сүйемелдеу департаменті","Department of Technical Support and Maintenance","department-it"],
+["Центр карьеры и трудоустройства","Мансап және жұмысқа орналастыру орталығы","Career and Employment Center","career-center"],
+["Департамент бухгалтерского учета","Бухгалтерлік есеп департаменті","Accounting Department","dep-accounting"],
+["Колледж информационных технологий","Ақпараттық технологиялар колледжі","College of Information Technology","college-itechnology"],
+["Юридический департамент","Заң департаменті","Legal Department","legal-dep"],
+["Департамент науки и инноваций","Ғылым және инновация департаменті","Department of Science and Innovation","science-innovation"],
+["Научная библиотека","Ғылыми кітапхана","Scientific Library","scientific-library"]
+];
+const DI={ru:0,kk:1,en:2};
+function buildDepts(){
+  const sel=document.getElementById('act-dept'),cur=sel.value||'0';
+  sel.innerHTML=DEPTS.map((d,i)=>`<option value="${i}">${d[DI[L]]}</option>`).join('');
+  sel.value=cur;deptLink();
+}
+function deptLink(){
+  const d=DEPTS[document.getElementById('act-dept').value||0],a=document.getElementById('dept-link');
+  a.href=a.textContent='https://astanait.edu.kz/ru/'+d[3];
+}
+
+(function(){
+  const fn=["Айдар","Амина","Бекзат","Динара","Ержан","Жанар","Заңғар","Камила","Мади","Нурсултан","Румия","Санжар","Томирис","Улан","Фариза"],
+        ln=["Сейтқали","Бекова","Омаров","Ким","Жумабаев","Тулегенова","Абдрахманов","Сатыбалды","Ибраев","Султанова","Алиев","Мукашев"],
+        ap=[["VS Code","Git"],["MS Office","Chrome"],["Python 3.11","Jupyter"],["Figma","Chrome"],["IntelliJ IDEA","Docker"],["Node.js","VS Code"],["MS Office","Zoom"]];
+  for(let i=110;FLEET.length<237;i++){
+    const stock=i%12===0,rep=!stock&&i%47===0,off=!stock&&!rep&&i%3===0;
+    const st=stock?'stock':rep?'repair':off?'offline':'online',a=ap[i%ap.length].slice();
+    if(i%29===0)a.push('!Steam');
+    FLEET.push({id:'AITU-NB-0'+i,sn:'88B'+(10000+i*37).toString(16).toUpperCase(),
+      st:stock?'—':fn[i%fn.length]+' '+ln[(i*7)%ln.length],sid:stock?'':String(231000+i*3),s:st,
+      seen:st==='online'?null:'1'+(i%9)+'.10.2026 '+String(8+i%14).padStart(2,'0')+':'+String(i%60).padStart(2,'0'),
+      apps:stock?[]:a,ip:stock||rep?'—':'10.20.'+(i%8)+'.'+(10+i%200),bat:stock?100:rep?0:20+(i*13)%80,
+      ssd:80+(i*17)%360,cpu:st==='online'?5+(i*11)%70:0});
+  }
+})();
+const PRICES={c1:80000,c2:120000,c3:45000,c4:15000};
+const ACTS=[];let curDev=null;let sessionTimer=null;
+
+/* ===== УТИЛИТЫ ===== */
+const gid=id=>document.getElementById(id);
+const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function toast(msg,type){const d=document.createElement('div');d.className='toast '+(type||'ok');d.textContent=msg;gid('toasts').appendChild(d);setTimeout(()=>d.remove(),5500)}
+/* Отправка на FastAPI (если бэкенд недоступен — тихий fallback на локальную логику).
+   Пути /api/... — ожидаемые; замените на реальные эндпоинты вашего main.py */
+function apiSend(path,payload){try{fetch(API_BASE+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),cache:'no-store'}).catch(()=>{})}catch(e){}}
+
+/* ===== ПОЛЬЗОВАТЕЛИ (демо, в памяти страницы) ===== */
+const DEFAULT_STUDENT={name:'Аликеев Алмаз',id:'231044',device:'AITU-NB-0102',tg:'@almaz_a'};
+let STUDENT=Object.assign({},DEFAULT_STUDENT);
+const USERS=[];let resetCode=null,resetTarget=null,resetExp=0;
+
+function authMsg(k,type){const m=gid('auth-msg');m.className='auth-msg '+(type||'err');m.textContent=t(k)}
+function authTab(n){
+  ['login','reg','forgot'].forEach(x=>{gid('ap-'+x).classList.toggle('hide',x!==n);gid('at-'+x).classList.toggle('on',x===n)});
+  const m=gid('auth-msg');m.className='auth-msg hide';m.textContent='';
+}
+function doRegister(){
+  const id=gid('reg-id').value.trim().toLowerCase(),p=gid('reg-pass').value,p2=gid('reg-pass2').value,tg=gid('reg-tg').value.trim();
+  if(!id||!p||!p2||!tg)return authMsg('errFill');
+  if(!/^@[A-Za-z0-9_]{5,32}$/.test(tg))return authMsg('errTg');
+  if(p.length<6)return authMsg('errPassLen');
+  if(p!==p2)return authMsg('errPassMatch');
+  if(USERS.some(u=>u.id===id))return authMsg('errExists');
+  USERS.push({id,pass:p,tg});
+  apiSend('/api/auth/register',{aitu_id:id,telegram:tg,password:p});
+  authTab('login');gid('login-role').value='student';gid('login-user').value=id;gid('login-pass').value='';
+  authMsg('msgRegOk','ok');
+}
+function sendResetCode(){
+  const v=gid('fg-id').value.trim().toLowerCase();
+  if(!v)return authMsg('errFill');
+  const isTg=/^@[a-z0-9_]{5,32}$/.test(v),isMail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  if(!isTg&&!isMail)return authMsg('errFormat');
+  resetTarget=USERS.find(u=>u.tg.toLowerCase()===v||u.id===v)||null;
+  resetCode=String(crypto.getRandomValues(new Uint32Array(1))[0]%900000+100000);resetExp=Date.now()+5*60*1000;
+  apiSend('/api/auth/forgot',{contact:v});
+  gid('fg-step2').classList.remove('hide');
+  authMsg('msgCodeSent','ok');
+  toast(t('tgBotMsg')+resetCode,'ok');
+}
+function doReset(){
+  const c=gid('fg-code').value.trim(),p=gid('fg-pass').value;
+  if(!c||!p)return authMsg('errFill');
+  if(p.length<6)return authMsg('errPassLen');
+  if(!resetCode||Date.now()>resetExp||c!==resetCode)return authMsg('errCode');
+  if(resetTarget)resetTarget.pass=p;
+  resetCode=null;resetTarget=null;gid('fg-step2').classList.add('hide');gid('fg-code').value='';gid('fg-pass').value='';
+  authTab('login');authMsg('msgResetOk','ok');
+}
+
+/* ===== ЗАЯВКИ (TICKETS) ===== */
+const TICKETS=[];const TICKET_KEY='unilaptop_tickets_v2';
+/* Маршрутизация: заявки sa1-sa3 -> Отдел выдачи (tab-act), остальные -> IT-администратор (tab-mon) */
+const STAFF_CATS=['sa1','sa2','sa3'];
+const routeOf=cat=>STAFF_CATS.includes(cat)?'staff':'admin';
+const tkTo=x=>x.to||routeOf(x.cat);
+const saveTickets=()=>LS.set(TICKET_KEY,TICKETS);
+function loadTickets(){const s=LS.get(TICKET_KEY,null);TICKETS.length=0;if(Array.isArray(s))TICKETS.push(...s);return s}
+if(loadTickets()===null){
+  TICKETS.push(
+   {id:'T-1002',ts:new Date(Date.now()-5*60000).toISOString(),sid:'231301',st:'Ахметова Мадина',dev:'—',tg:'@madina_a',cat:'sa1',to:'staff',comment:'Прошу выдать ноутбук для учёбы по программе Software Engineering (конфигурация: 32 GB RAM, GPU).',status:'pending'},
+   {id:'T-1001',ts:new Date(Date.now()-12*60000).toISOString(),sid:'231155',st:'Оспанова Алия',dev:'AITU-NB-0105',tg:'@aliya_o',cat:'tc2',to:'admin',comment:'Docker Desktop не запускается: WSL2 требует включить виртуализацию.',status:'pending'});
+  saveTickets();
+}
+const fmtTs=iso=>new Date(iso).toLocaleString({ru:'ru-RU',kk:'kk-KZ',en:'en-GB'}[L],{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+const tkBadge=st=>`<span class="b ${{pending:'b-bad',approved:'b-on',connected:'b-app',done:'b-off',rejected:'b-rej'}[st]}">${t({pending:'tkProcessing',approved:'tkApproved',connected:'tkConnected',done:'tkDone',rejected:'tkRejected'}[st])}</span>`;
+const noticeText=x=>t({sa1:'nt1',sa2:'nt2',sa3:'nt3'}[x.cat]||'nt1');
+
+function updateRouteHint(){gid('tk-route').textContent='➜ '+t('routeTo')+t(routeOf(gid('tk-cat').value)==='staff'?'toStaff':'toAdmin')}
+function openTicket(pre){
+  gid('tk-who').textContent=STUDENT.name+' · AITU ID '+STUDENT.id;
+  gid('tk-cat').value=(pre&&pre.cat)||'sa1';
+  gid('tk-comment').value=(pre&&pre.comment)||'';
+  gid('tk-err').className='auth-msg err hide';
+  updateRouteHint();
+  gid('m-ticket').classList.add('show');
+}
+function submitTicket(e){
+  e.preventDefault();
+  const comment=gid('tk-comment').value.trim();
+  if(!comment){const er=gid('tk-err');er.textContent=t('errComment');er.className='auth-msg err';return}
+  loadTickets();
+  const n=Math.max(1000,...TICKETS.map(x=>parseInt(x.id.slice(2),10)||0))+1,cat=gid('tk-cat').value,to=routeOf(cat);
+  const tk={id:'T-'+n,ts:new Date().toISOString(),sid:STUDENT.id,st:STUDENT.name,dev:STUDENT.device||'—',tg:STUDENT.tg||'',cat,to,comment,status:'pending'};
+  TICKETS.unshift(tk);saveTickets();apiSend('/api/tickets',tk);
+  closeM('m-ticket');renderTickets();
+  toast('✅ '+t('tkPush')+t(to==='staff'?'toStaff':'toAdmin')+' ('+tk.id+')','ok');
+}
+function resolveTicket(id){
+  const tk=TICKETS.find(x=>x.id===id);if(!tk)return;
+  tk.status='done';saveTickets();renderTickets();toast('✔ '+t('tkDone')+': '+id,'ok');
+}
+/* Одобрение заявки сотрудником отдела выдачи -> студент получает официальное уведомление */
+function approveTicket(id){
+  const tk=TICKETS.find(x=>x.id===id);if(!tk||tkTo(tk)!=='staff')return;
+  tk.status='approved';tk.seen=false;tk.apTs=new Date().toISOString();
+  saveTickets();apiSend('/api/tickets/'+encodeURIComponent(id)+'/approve',{status:'approved'});
+  renderTickets();toast('✔ '+t('tkApproved')+': '+id,'ok');
+}
+function checkNotices(){
+  if(gid('role').value!=='student'||gid('m-notice').classList.contains('show')||gid('m-login').classList.contains('show'))return;
+  const x=TICKETS.find(k=>k.sid===STUDENT.id&&k.status==='approved'&&!k.seen);
+  if(!x)return;
+  gid('nt-id').textContent=x.id+' · '+t(x.cat);
+  gid('nt-text').textContent=noticeText(x);
+  gid('nt-ok').onclick=()=>ackNotice(x.id);
+  gid('m-notice').classList.add('show');
+}
+function ackNotice(id){
+  const x=TICKETS.find(k=>k.id===id);if(x){x.seen=true;saveTickets()}
+  closeM('m-notice');renderTickets();checkNotices();
+}
+function goDesk(){
+  if(gid('role').value==='staff'){tab('act');gid('st-desk-wrap').scrollIntoView({behavior:'smooth'})}
+  else{tab('mon');gid('desk').scrollIntoView({behavior:'smooth'})}
+}
+/* ===== ОТКЛОНЕНИЕ ЗАЯВКИ ===== */
+function rejectTicket(id){
+  const tk=TICKETS.find(x=>x.id===id);if(!tk)return;
+  const role=gid('role').value;
+  if(!(tk.status==='pending'||(role==='admin'&&tk.status==='connected')))return;
+  if(rsTk&&rsTk.id===id)closeRemote();
+  tk.status='rejected';tk.rejTs=new Date().toISOString();
+  saveTickets();apiSend('/api/tickets/'+encodeURIComponent(id)+'/reject',{status:'rejected'});
+  renderTickets();toast('✖ '+t('tkRejected')+': '+id,'warn');
+}
+
+/* ===== КОРЗИНА (drag & drop, автоудаление через 30 дней) ===== */
+const TRASH_DAYS=30,DAY_MS=86400000,TRASH_OPEN={};
+const trashable=x=>x.status==='done'||x.status==='rejected';
+const myView=()=>gid('role').value==='student'?'s':'d';
+function purgeTrash(){
+  let ch=false;const now=Date.now();
+  TICKETS.forEach(x=>['tr_s','tr_d'].forEach(k=>{if(x[k]&&x[k]!=='gone'&&now-Date.parse(x[k])>TRASH_DAYS*DAY_MS){x[k]='gone';ch=true}}));
+  for(let i=TICKETS.length-1;i>=0;i--){if(TICKETS[i].tr_s==='gone'&&TICKETS[i].tr_d==='gone'){TICKETS.splice(i,1);ch=true}}
+  if(ch)saveTickets();
+}
+function dragTk(ev,id){ev.dataTransfer.setData('text/plain',id);ev.dataTransfer.effectAllowed='move';document.body.classList.add('dragging')}
+function dragEnd(){document.body.classList.remove('dragging');document.querySelectorAll('.trash.over').forEach(e=>e.classList.remove('over'))}
+function trashOver(ev){ev.preventDefault();ev.currentTarget.classList.add('over')}
+function trashLeave(ev){ev.currentTarget.classList.remove('over')}
+function dropTk(ev){ev.preventDefault();const id=ev.dataTransfer.getData('text/plain');dragEnd();moveToTrash(id)}
+function moveToTrash(id){
+  const x=TICKETS.find(k=>k.id===id),role=gid('role').value;if(!x)return;
+  const mine=role==='student'?x.sid===STUDENT.id:tkTo(x)===role;
+  if(!mine)return;
+  if(!trashable(x)){toast(t('trashOnly'),'warn');return}
+  x['tr_'+myView()]=new Date().toISOString();
+  saveTickets();renderTickets();
+}
+function restoreTk(id){
+  const x=TICKETS.find(k=>k.id===id);if(!x)return;
+  delete x['tr_'+myView()];saveTickets();renderTickets();
+}
+function toggleTrash(key){TRASH_OPEN[key]=!TRASH_OPEN[key];renderTickets()}
+function trashBox(elId,items,key){
+  const v=key==='student'?'s':'d',open=!!TRASH_OPEN[key];
+  const rows=items.map(x=>{
+    const left=Math.max(0,Math.ceil((Date.parse(x['tr_'+v])+TRASH_DAYS*DAY_MS-Date.now())/DAY_MS));
+    return `<div class="tr-row"><span><b>${esc(x.id)}</b> · ${t(x.cat)} · ${tkBadge(x.status)}</span><span class="tr-left">${t('trashLeft')}${left} ${t('daysShort')}</span><button class="btn-lnk" onclick="restoreTk('${esc(x.id)}')">${t('trashRestore')}</button></div>`;
+  }).join('')||`<div class="tr-row">${t('trashEmpty')}</div>`;
+  gid(elId).innerHTML=`<div class="trash" ondragover="trashOver(event)" ondragleave="trashLeave(event)" ondrop="dropTk(event)">
+    <div class="trash-h" onclick="toggleTrash('${key}')"><span><i class="fa-regular fa-trash-can"></i> ${t('trashTitle')} <span class="tr-n">${items.length}</span></span><span class="tr-hint">${t('trashHint')}</span><i class="fa-solid fa-chevron-${open?'up':'down'}"></i></div>
+    ${open?`<div class="trash-b">${rows}<div class="note-s">${t('trashNote')}</div></div>`:''}</div>`;
+}
+const trashBtn=x=>`<button class="btn-trash" title="${t('trashIn')}" onclick="moveToTrash('${esc(x.id)}')"><i class="fa-regular fa-trash-can"></i></button>`;
+const dragAttrs=x=>trashable(x)?` draggable="true" ondragstart="dragTk(event,'${esc(x.id)}')" ondragend="dragEnd()"`:'';
+
+function tkCard(x,actions){
+  return `<div class="tk ${x.status}"${dragAttrs(x)}>
+    <div class="tk-top"><b>${esc(x.id)}</b><small>${fmtTs(x.ts)}</small>${tkBadge(x.status)}</div>
+    <div class="tk-who"><i class="fa-solid fa-user-graduate"></i> <b>${esc(x.st)}</b> · AITU ID ${esc(x.sid)}${x.tg?' · '+esc(x.tg):''}<br><small>${t('tkDevice')}: ${esc(x.dev)}</small></div>
+    <div><span class="b b-app">${t(x.cat)}</span></div>
+    <div class="tk-c">${esc(x.comment)}</div>
+    ${actions?`<div class="tk-act">${actions}</div>`:''}
+  </div>`;
+}
+function renderTickets(){
+  purgeTrash();
+  const cnt=to=>TICKETS.filter(x=>tkTo(x)===to&&x.status==='pending').length,pa=cnt('admin'),ps=cnt('staff'),role=gid('role').value;
+  const setB=(id,n)=>{const e=gid(id);e.textContent=n;e.classList.toggle('hide',n===0)};
+  setB('nav-badge',pa);setB('tk-badge',pa);setB('nav-act-badge',ps);setB('st-badge',ps);setB('bell-badge',role==='staff'?ps:pa);
+  const order={pending:0,approved:1,connected:1,done:2,rejected:2};
+  const by=to=>TICKETS.filter(x=>tkTo(x)===to&&!x.tr_d).sort((a,b)=>order[a.status]-order[b.status]||b.ts.localeCompare(a.ts)).slice(0,12);
+  const binD=to=>TICKETS.filter(x=>tkTo(x)===to&&x.tr_d&&x.tr_d!=='gone').sort((a,b)=>b.tr_d.localeCompare(a.tr_d));
+  const rejBtn=x=>`<button class="btn btn-danger" onclick="rejectTicket('${esc(x.id)}')">${t('btnReject')}</button>`;
+  gid('tk-desk').innerHTML=by('admin').map(x=>tkCard(x,trashable(x)?trashBtn(x):
+    `<button class="btn rs" onclick="openRemote('${esc(x.id)}')">${t('btnRemote')}</button><button class="btn s" onclick="resolveTicket('${esc(x.id)}')">${t('btnResolve')}</button>${rejBtn(x)}`)).join('')||`<div class="muted">${t('deskEmpty')}</div>`;
+  gid('st-desk').innerHTML=by('staff').map(x=>tkCard(x,x.status==='pending'?
+    `<button class="btn g" onclick="approveTicket('${esc(x.id)}')"><i class="fa-solid fa-check"></i> ${t('btnApprove')}</button>${rejBtn(x)}`:
+    x.status==='approved'?`<button class="btn s" onclick="resolveTicket('${esc(x.id)}')">${t('btnResolve')}</button>`:trashBtn(x))).join('')||`<div class="muted">${t('deskEmpty')}</div>`;
+  trashBox('tr-admin',binD('admin'),'admin');
+  trashBox('tr-staff',binD('staff'),'staff');
+  const mine=TICKETS.filter(x=>x.sid===STUDENT.id&&!x.tr_s).sort((a,b)=>b.ts.localeCompare(a.ts));
+  const binS=TICKETS.filter(x=>x.sid===STUDENT.id&&x.tr_s&&x.tr_s!=='gone').sort((a,b)=>b.tr_s.localeCompare(a.tr_s));
+  const notes=mine.filter(x=>x.status==='approved').map(x=>`<div class="law" style="background:#e8f5e9;border-color:#a5d6a7;color:#1b5e20;margin:0 0 10px"><b>${esc(x.id)} — ${t('tkApproved')}</b><br>${esc(noticeText(x))}</div>`).join('');
+  gid('tk-my').innerHTML=notes+(mine.length?`<div class="scroll"><table><tbody>`+mine.map(x=>`<tr${dragAttrs(x)}><td><b>${esc(x.id)}</b></td><td>${fmtTs(x.ts)}</td><td>${t(x.cat)}</td><td>${t(tkTo(x)==='staff'?'toStaff':'toAdmin')}</td><td>${tkBadge(x.status)}</td><td style="width:34px">${trashable(x)?trashBtn(x):''}</td></tr>`).join('')+`</tbody></table></div>`:`<p class="muted">${t('tkNone')}</p>`);
+  trashBox('tr-student',binS,'student');
+}
+setInterval(()=>{purgeTrash();renderTickets()},600000);
+/* синхронизация между окнами браузера (студент в одном, сотрудник/админ в другом) */
+window.addEventListener('storage',e=>{
+  if(e.key!==TICKET_KEY)return;
+  const prev=Object.fromEntries(TICKETS.map(x=>[x.id,x.status]));
+  loadTickets();
+  const role=gid('role').value;
+  const fresh=TICKETS.filter(x=>x.status==='pending'&&!(x.id in prev)&&tkTo(x)===role);
+  if(fresh.length)toast('🔔 '+t('tkNewPush')+': '+fresh[0].id+' — '+fresh[0].st,'warn');
+  if(role==='student')TICKETS.filter(x=>x.sid===STUDENT.id&&x.status==='done'&&prev[x.id]&&prev[x.id]!=='done').forEach(x=>toast('✅ '+t('tkSolved')+': '+x.id,'ok'));
+  if(role==='student')TICKETS.filter(x=>x.sid===STUDENT.id&&x.status==='rejected'&&prev[x.id]&&prev[x.id]!=='rejected').forEach(x=>toast('✖ '+t('tkRejectedMsg')+': '+x.id,'warn'));
+  renderTickets();
+  if(role==='student')checkNotices();
+});
+
+/* ===== УДАЛЁННЫЙ СЕАНС ПО ЗАЯВКЕ (ANTI-ABUSE ENGINE) ===== */
+const SCENES={
+ tc1:{app:'Windows Installer',err:'Installation blocked by policy (AppLocker / UAC): administrator rights required.',ok:'Installer allowed for 24 h via an IT-approved exception.',log:['grant-temp-admin --ttl 24h','AppLocker: exception added','installer launched: OK']},
+ tc2:{app:'Docker Desktop',err:'WSL 2 / Hyper-V failed to start: virtualization is disabled by device policy.',ok:'Virtualization enabled for this device (Hyper-V + WSL2).',log:['policy set virtualization=allow','Hyper-V feature: enabled','WSL2 kernel: OK']},
+ tc3:{app:'AITU Agent v2.4',err:'Anti-Abuse Engine: Blur Mode failed to initialize (0x8A21).',ok:'Agent re-enrolled, Blur Mode is active.',log:['agent stop','agent re-enroll --device','Blur Mode: initialized']},
+ tc4:{app:'Unity Hub / Blender',err:'Installer blocked: package is not in the approved GameDev catalog.',ok:'Package added to the approved catalog; installation started.',log:['catalog add --profile gamedev','package signature: verified','installation started']},
+ tc5:{app:'System Diagnostics',err:'Software failure: application crashes repeatedly; system service errors detected.',ok:'Faulty services repaired; diagnostics report is clean.',log:['diag --full: service errors found','repair services','diagnostics: clean']}
+};
+let rsTimer=null,rsAuto=null,rsTk=null,rsMode='view',rsSec=900,rsFixing=false;
+function rsLogLine(txt,color){const el=gid('rs-log');const d=document.createElement('div');if(color)d.style.color=color;d.textContent='['+new Date().toLocaleTimeString('en-GB')+'] '+txt;el.appendChild(d);el.scrollTop=el.scrollHeight}
+function setRsMode(m,silent){
+  rsMode=m;gid('rs-bv').classList.toggle('on',m==='view');gid('rs-bc').classList.toggle('on',m==='control');
+  gid('rs-desk').classList.toggle('ctl',m==='control');
+  if(!silent)rsLogLine(t('rsLogMode')+(m==='view'?t('rsView'):t('rsControl')));
+}
+function openRemote(id){
+  const tk=TICKETS.find(x=>x.id===id);if(!tk)return;
+  if(tk.dev==='—'){toast(t('rsNoDevice'),'warn');return}
+  closeRemote();rsTk=tk;rsFixing=false;
+  if(tk.status==='pending'){tk.status='connected';saveTickets();renderTickets()}
+  const sc=SCENES[tk.cat]||SCENES.tc5,sid=Math.floor(10000+Math.random()*89999);
+  gid('rs-who').textContent=tk.st+' · AITU ID '+tk.sid;
+  gid('rs-dev').textContent=tk.dev;
+  gid('rs-wtitle').textContent=sc.app;
+  gid('rs-wbody').innerHTML='<div class="rs-err"><b>⚠</b> '+esc(sc.err)+'</div>';
+  gid('rs-wm').textContent='AUDIT_SESSION_ID #'+sid+' ('+tk.id+')';
+  gid('rs-log').innerHTML='';
+  setRsMode('view',true);
+  rsLogLine(t('rsLogStart')+' '+tk.id);
+  gid('m-remote').classList.add('show');
+  rsSec=900;gid('rs-timer').textContent='15:00';
+  rsTimer=setInterval(()=>{
+    rsSec--;gid('rs-timer').textContent=Math.floor(rsSec/60)+':'+String(rsSec%60).padStart(2,'0');
+    gid('rs-stat').textContent='CPU '+Math.round(10+Math.random()*40)+'% · '+Math.round(8+Math.random()*25)+' ms';
+    gid('rs-clock').textContent=new Date().toLocaleTimeString('en-GB');
+    if(rsSec<=0)closeRemote();
+  },1000);
+  rsAuto=setInterval(()=>{if(rsMode==='view'){const c=gid('rs-cur');c.style.left=(10+Math.random()*75)+'%';c.style.top=(10+Math.random()*75)+'%'}},1100);
+}
+function rsMove(e){
+  if(rsMode!=='control')return;
+  const r=gid('rs-desk').getBoundingClientRect(),c=gid('rs-cur');
+  c.style.left=(e.clientX-r.left-8)+'px';c.style.top=(e.clientY-r.top-8)+'px';
+}
+function rsClick(e){
+  if(rsMode!=='control')return;
+  if(e.target.closest('.rs-prot')){rsLogLine('BLOCKED: '+t('rsBlocked'),'#ff8a80');toast('🔒 '+t('rsBlocked'),'err');return}
+  const r=gid('rs-desk').getBoundingClientRect();
+  rsLogLine('click ('+Math.round(e.clientX-r.left)+', '+Math.round(e.clientY-r.top)+')');
+}
+function applyFix(){
+  if(!rsTk)return;
+  if(rsMode!=='control'){rsLogLine(t('rsViewOnly'),'#ffb74d');toast(t('rsViewOnly'),'warn');return}
+  if(rsFixing||rsTk.status==='done')return;
+  rsFixing=true;const tk=rsTk,sc=SCENES[tk.cat]||SCENES.tc5;
+  sc.log.forEach((l,i)=>setTimeout(()=>{if(rsTk===tk)rsLogLine('> '+l)},i*500));
+  setTimeout(()=>{
+    if(rsTk!==tk)return;
+    gid('rs-wbody').innerHTML='<div class="rs-okmsg">✔ '+esc(sc.ok)+'</div>';
+    tk.status='done';saveTickets();renderTickets();rsFixing=false;
+    rsLogLine(tk.id+' → '+t('tkDone'));toast('✔ '+t('rsFixed')+' ('+tk.id+')','ok');
+  },sc.log.length*500+300);
+}
+function closeRemote(){
+  clearInterval(rsTimer);clearInterval(rsAuto);rsTimer=rsAuto=null;
+  gid('m-remote').classList.remove('show');
+  if(rsTk&&rsTk.status==='connected'){rsTk.status='pending';saveTickets();renderTickets()}
+  rsTk=null;rsFixing=false;
+}
+
+/* ===== КАТАЛОГ ПО ОБРАЗОВАТЕЛЬНЫМ ПРОГРАММАМ ===== */
+const MAJORS=[
+ {k:'se',g:'high',n:'Software Engineering'},{k:'gd',g:'high',n:'Game Development'},{k:'cs',g:'high',n:'Computer Science'},
+ {k:'itm',g:'base',n:'IT Management'},{k:'dj',g:'base',n:'Digital Journalism'},{k:'ba',g:'base',n:'Business Analysis'}
+];
+const CATALOG=[
+ {id:'mbp',g:'high',n:'MacBook Pro 16 (Apple Silicon Pro/Max)',cpu:'Apple Silicon Pro/Max',ram:32,gpu:'Integrated high-core GPU',ssd:1000,bat:'up to 20 h',virt:'Docker / UTM / Parallels',rent:32000},
+ {id:'p16s',g:'high',n:'Lenovo ThinkPad P16s Gen 2',cpu:'Intel Core Ultra 7',ram:32,gpu:'NVIDIA RTX A500',ssd:1000,bat:'~10 h',virt:'Docker / WSL2 / Hyper-V',rent:30000},
+ {id:'g14',g:'high',n:'ASUS ROG Zephyrus G14',cpu:'AMD Ryzen 9',ram:32,gpu:'NVIDIA RTX 4060',ssd:1000,bat:'~10 h',virt:'Docker / WSL2 / Hyper-V',rent:34000},
+ {id:'air',g:'base',n:'MacBook Air 13 (Apple Silicon)',cpu:'Apple Silicon',ram:16,gpu:'Integrated GPU',ssd:512,bat:'up to 18 h',virt:'Docker (light)',rent:18000},
+ {id:'l14',g:'base',n:'Lenovo ThinkPad L14 Gen 5',cpu:'AMD Ryzen 7 PRO',ram:16,gpu:'Integrated Radeon',ssd:512,bat:'~12 h',virt:'WSL2 (light)',rent:15000},
+ {id:'840',g:'base',n:'HP EliteBook 840 G10',cpu:'Intel Core i7',ram:16,gpu:'Intel Iris Xe',ssd:512,bat:'~14 h',virt:'Hyper-V (light)',rent:16000}
+];
+function buildMajors(){
+  const sel=gid('major'),cur=sel.value||'se';
+  const grp=g=>`<optgroup label="${t(g==='high'?'majHigh':'majBase')}">`+MAJORS.filter(m=>m.g===g).map(m=>`<option value="${m.k}">${m.n}</option>`).join('')+'</optgroup>';
+  sel.innerHTML=grp('high')+grp('base');sel.value=cur;
+}
+function renderCatalog(){
+  const m=MAJORS.find(x=>x.k===gid('major').value)||MAJORS[0];
+  gid('cat-desc').textContent=t(m.g==='high'?'catHighDesc':'catBaseDesc');
+  const items=CATALOG.filter(c=>c.g===m.g);
+  gid('cat-grid').innerHTML=items.map(c=>`<div class="cat-card"><h4>${c.n}</h4>
+    <div><span class="tagr">${c.ram} GB RAM</span><span class="tagr p">${c.gpu}</span><span class="tagr">${c.ssd>=1000?'1 TB':c.ssd+' GB'} SSD</span></div>
+    <div style="font-size:13px">${c.cpu}<br>${t('catBat')}: <b>${c.bat}</b><br>${t('catVirt')}: <span class="tagr g">${c.virt}</span></div>
+    <button class="btn o" onclick="requestConfig('${c.id}')">${t('catBtn')}</button></div>`).join('');
+}
+function requestConfig(id){
+  const c=CATALOG.find(x=>x.id===id),m=MAJORS.find(x=>x.k===gid('major').value);
+  openTicket({cat:'sa1',comment:t('catReqPrefix')+': '+c.n+' ('+m.n+')'});
+}
+
+/* ===== АВТОРИЗАЦИЯ И ВХОД ===== */
+function updateLoginEmail(r){
+  const emails={owner:"owner@unilaptop.kz",admin:"admin.it@astanait.edu.kz",staff:"issuance.desk@astanait.edu.kz",student:"alikeyev.almaz@astanait.edu.kz"};
+  document.getElementById('login-user').value=emails[r];
+}
+
+function login(){performLogin()}
+function performLogin(){
+  const u=gid('login-user').value.trim().toLowerCase(),p=gid('login-pass').value;
+  const reg=USERS.find(x=>x.id===u);
+  if(reg){
+    if(reg.pass!==p){authMsg('errLogin','err');return}
+    STUDENT={name:reg.id,id:reg.id.split('@')[0],device:null,tg:reg.tg};
+    gid('login-role').value='student';
+  } else {
+    STUDENT=Object.assign({},DEFAULT_STUDENT);
+  }
+  const r=gid('login-role').value;
+  gid('role').value=r;
+  gid('m-login').classList.remove('show');
+  applyRole();
+}
+
+function logout(){
+  if(sessionTimer) clearInterval(sessionTimer);
+  closeRemote();
+  document.querySelectorAll('.modal').forEach(m=>m.classList.remove('show'));
+  STUDENT=Object.assign({},DEFAULT_STUDENT);
+  gid('login-role').value='owner';
+  updateLoginEmail('owner');
+  gid('login-pass').value='********';
+  authTab('login');
+  gid('m-login').classList.add('show');
+}
+
+/* ===== ПАНЕЛЬ ВЛАДЕЛЬЦА: МЕТРИКИ ПАРКА ===== */
+const API_BASE='http://127.0.0.1:8000';
+const OWNER={total:1000,alloc:237,cost:450000,life:36,mrr:3550000};
+const fmt=n=>n.toLocaleString(L==='en'?'en-US':'ru-RU');
+function renderOwner(){
+  const dep=FLEET.filter(d=>d.s!=='stock'),issued=dep.length;
+  const on=dep.filter(d=>d.s==='online').length,off=dep.filter(d=>d.s==='offline').length,rep=dep.filter(d=>d.s==='repair').length;
+  const soft=FLEET.reduce((n,d)=>n+d.apps.filter(a=>a[0]==='!').length,0);
+  const util=OWNER.alloc/OWNER.total*100,reserve=OWNER.total-OWNER.alloc;
+  const amort=Math.round(OWNER.alloc*OWNER.cost/OWNER.life),net=OWNER.mrr-amort,arpu=Math.round(OWNER.mrr/OWNER.alloc);
+  const kpi=(cls,lbl,val,sub)=>`<div class="kpi ${cls}"><small>${lbl}</small><div class="v">${val}</div><div class="sub">${sub}</div></div>`;
+  document.getElementById('own-kpi').innerHTML=
+    kpi('',t('kpiUtil'),util.toFixed(1)+'%',t('kpiUtilSub'))+
+    kpi('green',t('kpiMrr'),money(OWNER.mrr),'AITU')+
+    kpi('orange',t('kpiAmort'),money(amort),t('kpiAmortSub'))+
+    kpi('purple',t('kpiTenants'),'1',t('kpiTenantsSub')+': AITU');
+  const lg=(c,lbl,v)=>`<div class="lg"><div><span class="k" style="background:${c}"></span>${lbl}</div><b>${v}</b></div>`;
+  document.getElementById('own-struct').innerHTML=
+    `<div class="stack"><i style="width:${util}%;background:#2e7d32"></i><i style="width:${100-util}%;background:#f57c00"></i></div>`+
+    lg('#2e7d32',t('structAitu'),'23.7%')+lg('#f57c00',t('structStock'),'76.3%');
+  const row=(l,v)=>`<div class="fin-row"><span>${l}</span><b>${v}</b></div>`;
+  document.getElementById('own-fin').innerHTML=
+    row(t('kpiMrr'),money(OWNER.mrr))+row(t('kpiAmort'),money(amort))+row(t('finNet'),money(net))+row(t('finArpu'),money(arpu))+
+    `<div class="note-s">${t('finNote')}</div>`;
+  const pct=v=>issued?Math.round(v/issued*100):0;
+  const bar=(lbl,v,c)=>`<div>${lbl}: <b>${v}</b> (${pct(v)}%)</div><div class="bar"><i style="width:${pct(v)}%;background:${c}"></i></div>`;
+  document.getElementById('own-health').innerHTML=
+    bar(t('online'),on,'#2e7d32')+bar(t('offline'),off,'#78909c')+bar(t('repair'),rep,'#d32f2f');
+  const al=(lbl,v,cls)=>`<div class="alert-row"><span>${lbl}</span><span class="b ${cls}">${v}</span></div>`;
+  document.getElementById('own-alerts').innerHTML=
+    al(t('alOffline'),off,'b-off')+al(t('alRepair'),rep,'b-rep')+al(t('alSoft'),soft,'b-bad')+
+    ((off+rep+soft)===0?`<div class="note-s">${t('alNone')}</div>`:'');
+  const use=Math.round(issued/OWNER.alloc*100);
+  document.getElementById('own-tenants').innerHTML=
+    `<tr><td><b>Astana IT University (AITU)</b></td><td>${OWNER.alloc} ${t('pcs')}</td>
+     <td style="min-width:140px">${t('stIssuedS')}: ${issued} (${use}%)<div class="bar"><i style="width:${use}%"></i></div></td>
+     <td><span class="b b-on">${t('activeClient')}</span></td><td>${fmt(OWNER.mrr)} ₸</td></tr>`;
+}
+function checkApi(){
+  const chip=document.getElementById('api-chip'),txt=document.getElementById('api-chip-txt');
+  chip.className='chip';txt.textContent=t('apiCheck');
+  fetch(API_BASE+'/openapi.json',{mode:'no-cors',cache:'no-store'})
+    .then(()=>{chip.className='chip up';txt.textContent=t('apiOn')})
+    .catch(()=>{chip.className='chip down';txt.textContent=t('apiOff')});
+}
+
+/* ===== ПЕРЕВОД DOM (i18n) ===== */
+function syncLangUI(){
+  gid('lang').value=L;
+  document.querySelectorAll('.auth-lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===L));
+  document.querySelectorAll('[data-i18n-title]').forEach(e=>e.title=t(e.dataset.i18nTitle));
+  document.querySelectorAll('[data-i18n-label]').forEach(e=>e.label=t(e.dataset.i18nLabel));
+  if(gid('tk-route'))updateRouteHint();
+}
+function setLang(l){
+  L=l;document.documentElement.lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=t(e.dataset.i18n));
+  document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=t(e.dataset.ph));
+  buildChecklist();buildDepts();renderTable();renderStats();renderStatTab();renderMy();renderActs();calc();renderOwner();checkApi();renderTickets();buildMajors();renderCatalog();syncLangUI();
+}
+const money=n=>n.toLocaleString(L==='en'?'en-US':'ru-RU')+" ₸";
+
+/* ===== УПРАВЛЕНИЕ РОЛЯМИ И ВКЛАДКАМИ ===== */
+function applyRole(){
+  const r=document.getElementById('role').value;
+  
+  const show={
+    owner:['owner'],
+    admin:['mon'],
+    staff:['act','stat'],
+    student:['my']
+  }[r];
+
+  ['owner','mon','act','stat','my'].forEach(x=>{
+    const btn = document.getElementById('nav-'+x);
+    const visible = show.includes(x);
+    if(btn) btn.classList.toggle('hide', !visible);
+  });
+
+  document.getElementById('stats').classList.toggle('hide', r==='student'||r==='owner');
+  gid('bell').classList.toggle('hide', r!=='admin'&&r!=='staff');
+  loadTickets();renderMy();renderTickets();
+  tab(show[0]);
+  if(r==='admin'||r==='staff'){const pend=TICKETS.filter(x=>tkTo(x)===r&&x.status==='pending').length;if(pend)toast('🔔 '+t('deskNew')+pend,'warn')}
+  if(r==='student')checkNotices();
+}
+
+function tab(n){
+  ['owner','mon','act','stat','my'].forEach(x=>{
+    const el = document.getElementById('tab-'+x);
+    const btn = document.getElementById('nav-'+x);
+    if(el) el.classList.toggle('hide', x!==n);
+    if(btn) btn.classList.toggle('active', x===n);
+  });
+}
+
+/* ===== СТАТИСТИКА ПАРКА ===== */
+function renderStats(){
+  const issued=FLEET.filter(d=>d.s!=='stock').length;
+  s_('s-total',1000);s_('s-issued',issued);
+  s_('s-online',FLEET.filter(d=>d.s==='online').length);s_('s-broken',FLEET.filter(d=>d.s==='repair').length);
+}
+const s_=(id,v)=>document.getElementById(id).textContent=v;
+function renderStatTab(){
+  const n=FLEET.length,on=FLEET.filter(d=>d.s==='online').length,off=FLEET.filter(d=>d.s==='offline').length,
+  rep=FLEET.filter(d=>d.s==='repair').length,stk=FLEET.filter(d=>d.s==='stock').length;
+  const row=(lbl,v,c)=>`<div>${lbl}: <b>${v}</b> (${Math.round(v/n*100)}%)</div><div class="bar"><i style="width:${v/n*100}%;background:${c}"></i></div>`;
+  document.getElementById('dist').innerHTML=`<h3 style="font-size:15px;margin-bottom:8px">${t('dist')}</h3>`+
+   row(t('online'),on,'#2e7d32')+row(t('offline'),off,'#78909c')+row(t('repair'),rep,'#d32f2f')+row('Stock',stk,'#1976d2');
+  document.getElementById('incidents').innerHTML=`<p><b>AITU-NB-0104:</b> ${t('inc1')}</p><p><b>AITU-NB-0103:</b> ${t('inc2')}</p>`;
+}
+
+/* ===== МОНИТОРИНГ И ЗАПРОС СОГЛАСИЯ (CONSENT) ===== */
+function renderTable(){
+  const q=document.getElementById('q').value.trim().toLowerCase(),f=document.getElementById('flt').value;
+  const rows=FLEET.filter(d=>d.s!=='stock'&&(f==='all'||d.s===f)&&
+    (!q||(d.st+' '+d.sid+' '+d.sn+' '+d.id).toLowerCase().includes(q)));
+  document.getElementById('tbody').innerHTML=rows.map(d=>{
+    const cls={online:'b-on',offline:'b-off',repair:'b-rep'}[d.s];
+    const apps=d.apps.map(a=>a[0]==='!'?`<span class="b b-bad">${a.slice(1)} (${t('unapproved')})</span>`:`<span class="b b-app">${a}</span>`).join('');
+    const btn=d.s==='online'?`<button class="btn" onclick="event.stopPropagation();requestRemote('${d.id}')"><i class="fa-solid fa-display"></i> ${t('remote')}</button>`:`<button class="btn" disabled>${t('unavail')}</button>`;
+    return `<tr class="click" onclick="openDev('${d.id}')"><td><b>${d.id}</b><br><small>SN: ${d.sn}</small></td><td>${d.st}<br><small>ID: ${d.sid}</small></td>
+    <td><span class="b ${cls}">${t(d.s)}</span></td><td>${d.seen||t('now')}</td><td>${apps}</td><td>${btn}</td></tr>`;
+  }).join('')||`<tr><td colspan="6" style="text-align:center;color:#888">—</td></tr>`;
+}
+
+function requestRemote(laptopId){
+  document.getElementById('c-laptop').innerText = laptopId;
+  document.getElementById('m-consent').classList.add('show');
+}
+
+function respondConsent(granted){
+  document.getElementById('m-consent').classList.remove('show');
+  if(granted){
+    document.getElementById('m-term').classList.add('show');
+    startSessionTimer();
+  } else {
+    alert("❌ Студент отклонил запрос на удаленное подключение. Запись внесена в immutable audit log.");
+  }
+}
+
+/* ===== КАРТОЧКА УСТРОЙСТВА ===== */
+function openDev(id){
+  const d=FLEET.find(x=>x.id===id);
+  const bar=(l,v,u)=>`<div>${l}: <b>${v}${u}</b></div><div class="bar"><i style="width:${Math.min(v,100)}%"></i></div>`;
+  document.getElementById('m-dev-body').innerHTML=`<h3><i class="fa-solid fa-laptop"></i> ${t('devCard')}: ${d.id}</h3>
+   <p>${d.st} (ID ${d.sid}) — <span class="b ${{online:'b-on',offline:'b-off',repair:'b-rep'}[d.s]}">${t(d.s)}</span></p><br>
+   <p>${t('ip')}: <b>${d.ip}</b> &nbsp; S/N: <b>${d.sn}</b></p><br>
+   ${bar(t('battery'),d.bat,'%')}${bar(t('cpu'),d.cpu,'%')}${bar(t('ssd'),d.ssd,' GB')}
+   <div style="text-align:right"><button class="btn s" onclick="closeM('m-dev')">${t('close')}</button></div>`;
+  document.getElementById('m-dev').classList.add('show');
+}
+const closeM=id=>document.getElementById(id).classList.remove('show');
+
+/* ===== ТЕРМИНАЛ И ТАЙМЕР СЕАНСА ===== */
+function tp(html){const el=document.getElementById('term');el.innerHTML+=html+'<br>';el.scrollTop=el.scrollHeight}
+function startSessionTimer(){
+  document.getElementById('term').innerHTML='';document.getElementById('term-cmd').value='';
+  tp('[SYSTEM] '+t('t_conn'));setTimeout(()=>tp('[SYSTEM] '+t('t_ok')),600);
+  let sec = 900;
+  const tEl = document.getElementById('timer');
+  if(sessionTimer) clearInterval(sessionTimer);
+  sessionTimer = setInterval(() => {
+    sec--;
+    let m = Math.floor(sec / 60), s = sec % 60;
+    tEl.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+    if (sec <= 0) { clearInterval(sessionTimer); closeSession(); alert("⏱️ 15-минутный лимит сеанса исчерпан."); }
+  }, 1000);
+}
+function runCmd(){
+  const inp=document.getElementById('term-cmd'),c=inp.value.trim().toLowerCase();inp.value='';
+  if(!c)return;tp('&gt; '+c.replace(/</g,'&lt;'));
+  switch(c){
+    case 'help':tp(t('t_help'));break;
+    case 'status':tp(t('t_status')+'Active | CPU 18% | IP 10.20.4.12');break;
+    case 'ping':tp(t('t_ping')+(8+Math.floor(Math.random()*30))+' ms');break;
+    case 'apps':tp('VS Code, Docker, Python 3.11');break;
+    case 'lock':tp(t('t_lock'));break;
+    case 'reboot':tp(t('t_reboot'));break;
+    case 'clear':document.getElementById('term').innerHTML='';break;
+    case 'exit':closeSession();break;
+    default:tp(t('t_unk')+c.replace(/</g,'&lt;'));
+  }
+}
+function closeSession(){
+  if(sessionTimer) clearInterval(sessionTimer);
+  document.getElementById('m-term').classList.remove('show');
+}
+
+/* ===== ЧЕК-ЛИСТ И КАЛЬКУЛЯТОР УЩЕРБА ===== */
+function buildChecklist(){
+  const keep=[...document.querySelectorAll('#chk input[type=checkbox]')].map(c=>c.checked);
+  document.getElementById('chk').innerHTML=['c1','c2','c3','c4'].map((k,i)=>`<tr><td>${t(k)}</td>
+   <td style="text-align:center"><input type="checkbox" id="${k}" ${keep[i]===false?'':'checked'} onchange="calc()"></td>
+   <td><input type="text" style="width:100%" placeholder="${t('phNote')}"></td></tr>`).join('');
+}
+function calc(){
+  const ret=document.getElementById('act-type').value==='return';
+  const sum=Object.keys(PRICES).reduce((s,k)=>s+(document.getElementById(k)&&!document.getElementById(k).checked?PRICES[k]:0),0);
+  const el=document.getElementById('comp');
+  el.classList.toggle('hide',!(ret&&sum>0));el.textContent=t('compT')+money(sum);
+}
+
+/* ===== ПОДПИСЬ КАНБАС ===== */
+const cv=document.getElementById('sig'),cx=cv.getContext('2d');let draw=false,signed=false;
+cx.lineWidth=2;cx.lineCap='round';cx.strokeStyle='#0d47a1';
+function pos(e){const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]}
+cv.addEventListener('pointerdown',e=>{draw=true;cv.setPointerCapture(e.pointerId);const[x,y]=pos(e);cx.beginPath();cx.moveTo(x,y)});
+cv.addEventListener('pointermove',e=>{if(!draw)return;const[x,y]=pos(e);cx.lineTo(x,y);cx.stroke();signed=true});
+cv.addEventListener('pointerup',()=>draw=false);
+function clearSig(){cx.clearRect(0,0,cv.width,cv.height);signed=false}
+
+function saveAct(e){
+  e.preventDefault();
+  if(!signed){alert(t('needSign'));return}
+  const ty=document.getElementById('act-type').value;
+  ACTS.unshift({date:document.getElementById('act-date').value,type:ty,st:document.getElementById('act-student').value,
+    lp:document.getElementById('act-laptop').value,grp:document.getElementById('act-group').value,dept:DEPTS[document.getElementById('act-dept').value][DI[L]],sum:document.getElementById('comp').classList.contains('hide')?'':document.getElementById('comp').textContent});
+  renderActs();clearSig();e.target.reset();document.getElementById('act-date').value=today();deptLink();buildChecklist();calc();
+  alert(t('saved'));
+}
+function renderActs(){
+  document.getElementById('acts-log').innerHTML=ACTS.length?`<table><tbody>`+ACTS.map(a=>`<tr><td>${a.date}</td><td>${a.type==='issue'?t('issue'):t('ret')}</td><td>${a.st}</td><td>${a.lp}</td><td>${a.grp}</td><td>${a.dept}</td><td>${a.sum}</td></tr>`).join('')+`</tbody></table>`:t('noActs');
+}
+
+function renderMy(){
+  const d=FLEET.find(x=>x.id===STUDENT.device);
+  if(!d){gid('my-body').innerHTML=`<p><b>${esc(STUDENT.name)}</b> · AITU ID ${esc(STUDENT.id)}</p><div class="law">${t('noDevice')}</div>`;return}
+  gid('my-body').innerHTML=`<div class="grid2"><div>
+   <p><b>${t('model')}:</b> Lenovo ThinkPad L14 Gen 3</p><p><b>${t('inv')}:</b> ${d.id}</p><p><b>S/N:</b> ${d.sn}</p>
+   <p><b>${t('rent')}:</b> 01.09.2026 — 30.06.2027</p><p><span class="b b-on">${t(d.s)}</span></p></div>
+   <div><b>${t('myActs')}</b><p class="muted">AITU-0102-IN — ${t('actIn')}</p></div></div>`;
+}
+const today=()=>new Date().toISOString().slice(0,10);
+
+document.getElementById('act-date').value=today();
+setLang('ru');
+</script>
+</body>
+</html>
